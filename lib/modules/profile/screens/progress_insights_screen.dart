@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:mealist_ai/modules/profile/screens/widgets/insight_card.dart';
+import 'package:mealist_ai/modules/profile/screens/widgets/summary_box.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -197,15 +199,15 @@ class ProgressInsightsScreen extends StatelessWidget {
 
             Row(
               children: [
-                const _SummaryBox(label: 'Planned', count: '14'),
+                const SummaryBox(label: 'Planned', count: '14'),
                 SizedBox(width: AppSpacing.sm.w),
-                const _SummaryBox(
+                const SummaryBox(
                   label: 'Cooked',
                   count: '11',
                   color: AppColors.primary,
                 ),
                 SizedBox(width: AppSpacing.sm.w),
-                const _SummaryBox(label: 'Skipped', count: '3'),
+                const SummaryBox(label: 'Skipped', count: '3'),
               ],
             ),
 
@@ -215,7 +217,7 @@ class ProgressInsightsScreen extends StatelessWidget {
             const Text('Mealist Insights', style: AppTextStyles.headlineSmall),
             SizedBox(height: AppSpacing.md.h),
 
-            const _InsightCard(
+            const InsightCard(
               icon: Icons.auto_awesome,
               iconColor: AppColors.accent,
               bgColor: AppColors.accentSurface,
@@ -225,7 +227,7 @@ class ProgressInsightsScreen extends StatelessWidget {
 
             SizedBox(height: AppSpacing.md.h),
 
-            const _InsightCard(
+            const InsightCard(
               icon: Icons.kitchen_outlined,
               iconColor: AppColors.primary,
               bgColor: AppColors.white,
@@ -262,80 +264,6 @@ class ProgressInsightsScreen extends StatelessWidget {
   }
 }
 
-class _SummaryBox extends StatelessWidget {
-  final String label;
-  final String count;
-  final Color? color;
 
-  const _SummaryBox({
-    required this.label,
-    required this.count,
-    this.color,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
-        ),
-        child: Column(
-          children: [
-            Text(
-              count,
-              style: AppTextStyles.displayMedium.copyWith(
-                color: color ?? AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(label, style: AppTextStyles.bodySmall),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
-class _InsightCard extends StatelessWidget {
-  final IconData icon;
-  final Color iconColor;
-  final Color bgColor;
-  final String text;
-
-  const _InsightCard({
-    required this.icon,
-    required this.iconColor,
-    required this.bgColor,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.cardPadding),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: iconColor, size: 22),
-          SizedBox(width: AppSpacing.md.w),
-          Expanded(
-            child: Text(
-              text,
-              style: AppTextStyles.bodyMedium.copyWith(height: 1.5),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

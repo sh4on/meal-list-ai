@@ -6,56 +6,90 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../routes/app_routes.dart';
+import 'widgets/add_to_meal_plan_bottom_sheet.dart';
+import 'widgets/cuisine_detail/cuisine_recipe_card.dart';
 
-// cuisine detail screen
-// explores curated cultural culinary traditions, highlighted ingredients, and recipes
-class CuisineDetailScreen extends StatelessWidget {
+// cuisine detail screen (e.g., Turkish cuisine)
+// includes hero image, tailored personalization insight, filter chips, and recipes
+class CuisineDetailScreen extends StatefulWidget {
   const CuisineDetailScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    const List<Map<String, String>> recipes = [
-      {
-        'title': 'Turkish Shakshuka (Menemen)',
-        'time': '20m',
-        'kcal': '340 kcal',
-        'image':
-            'https://images.unsplash.com/photo-1590412200988-a436970781fa?w=400&q=80',
-      },
-      {
-        'title': 'Red Lentil Soup (Mercimek)',
-        'time': '30m',
-        'kcal': '280 kcal',
-        'image':
-            'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80',
-      },
-      {
-        'title': 'Grilled Chicken Shish Bowl',
-        'time': '25m',
-        'kcal': '510 kcal',
-        'image':
-            'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&q=80',
-      },
-    ];
+  State<CuisineDetailScreen> createState() => _CuisineDetailScreenState();
+}
 
+class _CuisineDetailScreenState extends State<CuisineDetailScreen> {
+  String _selectedCategory = 'All';
+
+  final List<String> _categories = const [
+    'All',
+    'Kebabs',
+    'Soups',
+    'Mezes',
+    'Under 30 min',
+  ];
+
+  final List<Map<String, dynamic>> _recipes = const [
+    {
+      'title': 'Turkish Lentil Chicken Bowl',
+      'match': '96% Match',
+      'time': '30 min',
+      'kcal': '520 kcal',
+      'tag': 'High Protein',
+      'image':
+          'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80',
+    },
+    {
+      'title': 'Spiced Lamb Köfte with Mint Salad',
+      'match': '92% Match',
+      'time': '25 min',
+      'kcal': '580 kcal',
+      'tag': 'Dairy-Free',
+      'image':
+          'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80',
+    },
+    {
+      'title': 'Red Lentil Soup (Mercimek Çorbası)',
+      'match': '88% Match',
+      'time': '20 min',
+      'kcal': '280 kcal',
+      'tag': 'Vegan Friendly',
+      'image':
+          'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=800&q=80',
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bg,
       body: CustomScrollView(
         slivers: [
-          // hero image app bar
+          // cuisine hero banner
           SliverAppBar(
-            expandedHeight: 240.h,
+            expandedHeight: 220.h,
             pinned: true,
             backgroundColor: AppColors.bg,
             leading: CircleAvatar(
               backgroundColor: AppColors.white.withValues(alpha: 0.85),
               child: IconButton(
-                icon:
-                    const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: AppColors.textPrimary,
+                ),
                 onPressed: Get.back,
               ),
             ),
+            actions: [
+              CircleAvatar(
+                backgroundColor: AppColors.white.withValues(alpha: 0.85),
+                child: IconButton(
+                  icon: const Icon(Icons.search, color: AppColors.textPrimary),
+                  onPressed: () {},
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               background: CachedNetworkImage(
                 imageUrl:
@@ -69,159 +103,165 @@ class CuisineDetailScreen extends StatelessWidget {
             ),
           ),
 
-          // content body
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSpacing.screenH.w,
-                vertical: AppSpacing.md.h,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Turkish Cuisine',
-                      style: AppTextStyles.headlineLarge,),
-                  SizedBox(height: AppSpacing.xs.h),
-                  Text(
-                    'Rich in olive oil, fresh herbs, flame-roasted vegetables, and slow-simmered savory legumes.',
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.textSecondary,
-                      height: 1.5,
-                    ),
+          SliverPadding(
+            padding: EdgeInsets.all(AppSpacing.screenH.w),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                // title & subtitle
+                const Text(
+                  'Turkish Cuisine',
+                  style: AppTextStyles.headlineLarge,
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'Rich spices, tender grilled meats, and comforting slow-simmered stews.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.textSecondary,
+                    height: 1.4,
                   ),
+                ),
 
-                  SizedBox(height: AppSpacing.lg.h),
+                const SizedBox(height: 12),
 
-                  // hallmark ingredients
-                  const Text('Hallmark Flavors',
-                      style: AppTextStyles.titleMedium,),
-                  SizedBox(height: AppSpacing.xs.h),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
+                // personalized insight banner
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF3FAF6),
+                    borderRadius: BorderRadius.circular(AppRadius.md),
+                    border: Border.all(color: const Color(0xFFD1EEDB)),
+                  ),
+                  child: const Row(
                     children: [
-                      'Sumac',
-                      'Aleppo Pepper',
-                      'Yogurt',
-                      'Eggplant',
-                      'Fresh Mint',
-                      'Garlic',
-                    ].map((final String flavor) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
+                      Icon(
+                        Icons.check_circle_outline,
+                        color: Color(0xFF2E634F),
+                        size: 18,
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          'Personalized for you: Dairy-free modifications automatically highlighted.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF1E4637),
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        decoration: BoxDecoration(
-                          color: AppColors.cardBgSecondary,
-                          borderRadius: BorderRadius.circular(AppRadius.pill),
-                          border: Border.all(color: AppColors.border),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                // category filter chips
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: _categories.map((String cat) {
+                      final bool isSelected = _selectedCategory == cat;
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: ChoiceChip(
+                          label: Text(cat),
+                          selected: isSelected,
+                          onSelected: (bool val) {
+                            if (val) {
+                              setState(() {
+                                _selectedCategory = cat;
+                              });
+                            }
+                          },
+                          backgroundColor: AppColors.white,
+                          selectedColor: const Color(0xFF3B6E59),
+                          labelStyle: TextStyle(
+                            color: isSelected
+                                ? AppColors.white
+                                : AppColors.textPrimary,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.w500,
+                            fontSize: 13,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppRadius.pill),
+                            side: BorderSide(
+                              color: isSelected
+                                  ? const Color(0xFF3B6E59)
+                                  : AppColors.border,
+                            ),
+                          ),
                         ),
-                        child: Text(flavor, style: AppTextStyles.labelSmall),
                       );
                     }).toList(),
                   ),
+                ),
 
-                  SizedBox(height: AppSpacing.sectionGap.h),
+                const SizedBox(height: 16),
 
-                  // popular recipes list
-                  const Text('Featured Dishes',
-                      style: AppTextStyles.headlineSmall,),
-                  SizedBox(height: AppSpacing.md.h),
+                // recipe items
+                ..._recipes.map(
+                  (Map<String, dynamic> recipe) =>
+                      CuisineRecipeCard(recipe: recipe),
+                ),
 
-                  ...recipes.map((final item) {
-                    return GestureDetector(
-                      onTap: () {
-                        Get.toNamed(
-                          AppRoutes.recipeDetails,
-                          arguments: {
-                            'name': item['title']!,
-                            'time': item['time']!,
-                            'kcal': item['kcal']!,
-                            'tag': 'Turkish',
-                            'image': item['image']!,
-                          },
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        padding: const EdgeInsets.all(AppSpacing.cardPadding),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(AppRadius.md),
-                          border: Border.all(color: AppColors.border),
-                        ),
-                        child: Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(AppRadius.sm),
-                              child: CachedNetworkImage(
-                                imageUrl: item['image']!,
-                                width: 72.w,
-                                height: 72.w,
-                                memCacheWidth: 144,
-                                fit: BoxFit.cover,
-                                placeholder: (_, __) =>
-                                    Container(color: AppColors.shimmerBase),
-                                errorWidget: (_, __, ___) =>
-                                    Container(color: AppColors.shimmerBase),
-                              ),
-                            ),
-                            SizedBox(width: AppSpacing.md.w),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item['title']!,
-                                    style: AppTextStyles.titleSmall,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.timer_outlined,
-                                        size: 13,
-                                        color: AppColors.textSecondary,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        item['time']!,
-                                        style: AppTextStyles.bodySmall,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      const Icon(
-                                        Icons.local_fire_department_outlined,
-                                        size: 13,
-                                        color: AppColors.textSecondary,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        item['kcal']!,
-                                        style: AppTextStyles.bodySmall,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 14,
-                              color: AppColors.textTertiary,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-
-                  SizedBox(height: AppSpacing.xl.h),
-                ],
-              ),
+                SizedBox(height: 80.h),
+              ]),
             ),
           ),
         ],
+      ),
+
+      // sticky bottom bar
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.fromLTRB(
+          AppSpacing.screenH.w,
+          12,
+          AppSpacing.screenH.w,
+          MediaQuery.of(context).padding.bottom + 12,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          border: Border(
+            top: BorderSide(color: AppColors.border.withValues(alpha: 0.6)),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.04),
+              blurRadius: 10,
+              offset: const Offset(0, -4),
+            ),
+          ],
+        ),
+        child: SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: ElevatedButton(
+            onPressed: () {
+              AddToMealPlanBottomSheet.show(
+                context,
+                name: 'Turkish Lentil Chicken Bowl',
+                image:
+                    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80',
+                time: '30 min',
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF3B6E59),
+              foregroundColor: AppColors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadius.md),
+              ),
+            ),
+            child: const Text(
+              '+ Add to Meal Plan',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
       ),
     );
   }

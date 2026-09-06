@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,12 +5,13 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../routes/app_routes.dart';
-import '../../../shared/common_widgets/outline_button_widget.dart';
-import '../../../shared/common_widgets/primary_button_widget.dart';
+import 'widgets/add_to_meal_plan_bottom_sheet.dart';
+import 'widgets/surprise_me/surprise_filter_chips.dart';
+import 'widgets/surprise_me/surprise_hero_card.dart';
+import 'widgets/surprise_me/surprise_why_picked_card.dart';
 
 // surprise me screen
-// selects an unexpected recipe aligned with user macros and pantry inventory
+// presents a personalized single recipe pick with explainability and spinning options
 class SurpriseMeScreen extends StatefulWidget {
   const SurpriseMeScreen({super.key});
 
@@ -20,177 +20,146 @@ class SurpriseMeScreen extends StatefulWidget {
 }
 
 class _SurpriseMeScreenState extends State<SurpriseMeScreen> {
-  int _recipeIndex = 0;
+  String _selectedFilter = 'Something new';
 
-  final List<Map<String, String>> _candidates = [
+  final List<String> _filters = const [
+    'Quick',
+    'Use what I have',
+    'Something new',
+    'High Protein',
+  ];
+
+  int _currentIndex = 0;
+  final List<Map<String, dynamic>> _recipes = const [
+    {
+      'title': 'Turkish Lentil Chicken Bowl',
+      'time': '30 min',
+      'kcal': '520 kcal',
+      'match': '94% Match',
+      'reason':
+          'Matches your high-protein goal • you like Turkish food • 6 of 8 ingredients at home',
+      'image':
+          'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80',
+    },
     {
       'title': 'Crispy Skin Salmon & Asparagus',
-      'desc':
-          'Quick 25-minute high-protein dinner utilizing fresh lemon and herbs.',
       'time': '25 min',
       'kcal': '460 kcal',
       'match': '96% Match',
+      'reason':
+          'Rich in Omega-3 • Fits your 30-minute preference • High protein',
       'image':
           'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80',
     },
     {
       'title': 'Garlic Butter Herb Steak Bites',
-      'desc': 'Tender seared beef morsels tossed in garlic-herb pan reduction.',
       'time': '20 min',
       'kcal': '520 kcal',
       'match': '93% Match',
+      'reason':
+          'High protein • Quick dinner • Utilizes pantry rosemary and garlic',
       'image':
           'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80',
-    },
-    {
-      'title': 'Mediterranean Harvest Bowl',
-      'desc':
-          'Warm grains with roasted chickpeas, kalamata olives, and feta crumble.',
-      'time': '18 min',
-      'kcal': '390 kcal',
-      'match': '91% Match',
-      'image':
-          'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80',
     },
   ];
 
   void _spin() {
     setState(() {
-      _recipeIndex = (_recipeIndex + 1) % _candidates.length;
+      _currentIndex = (_currentIndex + 1) % _recipes.length;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, String> recipe = _candidates[_recipeIndex];
+    final Map<String, dynamic> recipe = _recipes[_currentIndex];
 
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: AppBar(
+        centerTitle: false,
         backgroundColor: AppColors.bg,
+        elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: Get.back,
         ),
-        title: const Text('Surprise Me', style: AppTextStyles.headlineSmall),
-        centerTitle: true,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text(
+              'Surprise Me',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "Not sure what to cook? I'll choose one.",
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ),
             SizedBox(height: AppSpacing.md.h),
 
-            // recommendation container
-            Expanded(
+            // filter chips
+            SurpriseFilterChips(
+              filters: _filters,
+              selectedFilter: _selectedFilter,
+              onSelected: (String filter) {
+                setState(() {
+                  _selectedFilter = filter;
+                });
+              },
+            ),
+
+            SizedBox(height: AppSpacing.md.h),
+
+            // hero recipe card
+            SurpriseHeroCard(recipe: recipe),
+
+            SizedBox(height: AppSpacing.md.h),
+
+            // why Mealist Picked It callout
+            SurpriseWhyPickedCard(
+              reason: (recipe['reason'] as String?) ?? '',
+            ),
+
+            SizedBox(height: AppSpacing.lg.h),
+
+            // + Add This Meal button
+            InkWell(
+              onTap: () {
+                AddToMealPlanBottomSheet.show(
+                  context,
+                  name: recipe['title'] as String?,
+                  image: recipe['image'] as String?,
+                  time: recipe['time'] as String?,
+                );
+              },
+              borderRadius: BorderRadius.circular(AppRadius.md),
               child: Container(
                 width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: const Color(0xFF3B6E59),
                   borderRadius: BorderRadius.circular(AppRadius.md),
-                  border: Border.all(color: AppColors.accent, width: 1.5),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // recipe image with match badge
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(AppRadius.md),
-                            topRight: Radius.circular(AppRadius.md),
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl: recipe['image']!,
-                            height: 220.h,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            placeholder: (_, __) =>
-                                Container(color: AppColors.shimmerBase),
-                            errorWidget: (_, __, ___) =>
-                                Container(color: AppColors.shimmerBase),
-                          ),
-                        ),
-                        Positioned(
-                          top: 12,
-                          right: 12,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.white.withValues(alpha: 0.95),
-                              borderRadius:
-                                  BorderRadius.circular(AppRadius.pill),
-                            ),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.auto_awesome,
-                                  size: 13,
-                                  color: AppColors.accent,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  recipe['match']!,
-                                  style: AppTextStyles.labelSmall.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColors.textPrimary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(AppSpacing.cardPaddingLg),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            recipe['title']!,
-                            style: AppTextStyles.headlineMedium,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            recipe['desc']!,
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.textSecondary,
-                              height: 1.5,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.timer_outlined,
-                                size: 16,
-                                color: AppColors.textSecondary,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                recipe['time']!,
-                                style: AppTextStyles.bodyMedium,
-                              ),
-                              const SizedBox(width: 16),
-                              const Icon(
-                                Icons.local_fire_department_outlined,
-                                size: 16,
-                                color: AppColors.textSecondary,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                recipe['kcal']!,
-                                style: AppTextStyles.bodyMedium,
-                              ),
-                            ],
-                          ),
-                        ],
+                    Icon(Icons.add, color: AppColors.white, size: 20),
+                    SizedBox(width: 8),
+                    Text(
+                      'Add This Meal',
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -198,34 +167,39 @@ class _SurpriseMeScreenState extends State<SurpriseMeScreen> {
               ),
             ),
 
-            SizedBox(height: AppSpacing.lg.h),
+            const SizedBox(height: 12),
 
-            // cook this recipe CTA
-            PrimaryButtonWidget(
-              label: 'Cook This Recipe',
-              onTap: () {
-                Get.toNamed(
-                  AppRoutes.recipeDetails,
-                  arguments: {
-                    'name': recipe['title']!,
-                    'time': recipe['time']!,
-                    'kcal': recipe['kcal']!,
-                    'tag': 'Surprise',
-                    'image': recipe['image']!,
-                  },
-                );
-              },
-            ),
-
-            SizedBox(height: AppSpacing.sm.h),
-
-            // spin again
-            OutlineButtonWidget(
-              label: '🎲 Spin Again (Different Meal)',
+            // surprise Again button
+            InkWell(
               onTap: _spin,
+              borderRadius: BorderRadius.circular(AppRadius.md),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(AppRadius.md),
+                  border: Border.all(color: AppColors.border),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.refresh, size: 18, color: Color(0xFF3B6E59)),
+                    SizedBox(width: 8),
+                    Text(
+                      'Surprise Again',
+                      style: TextStyle(
+                        color: Color(0xFF3B6E59),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
 
-            SizedBox(height: AppSpacing.xl.h),
+            SizedBox(height: AppSpacing.xxxl.h),
           ],
         ),
       ),

@@ -12,6 +12,8 @@ import '../modules/cook_mode/bindings/cook_mode_binding.dart';
 import '../modules/cook_mode/screens/cook_mode_screen.dart';
 import '../modules/cook_mode/screens/cooking_complete_screen.dart';
 import '../modules/explore/screens/cuisine_detail_screen.dart';
+import '../modules/explore/screens/for_you_screen.dart';
+import '../modules/explore/screens/search_results_screen.dart';
 import '../modules/explore/screens/surprise_me_screen.dart';
 import '../modules/main_shell/bindings/main_shell_binding.dart';
 import '../modules/main_shell/screens/main_shell_screen.dart';
@@ -210,6 +212,16 @@ abstract final class AppPages {
     GetPage(
       name: AppRoutes.surpriseMe,
       page: SurpriseMeScreen.new,
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.exploreForYou,
+      page: ForYouScreen.new,
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.searchResults,
+      page: SearchResultsScreen.new,
       transition: Transition.rightToLeft,
     ),
 

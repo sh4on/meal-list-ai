@@ -43,6 +43,8 @@ abstract final class AppRoutes {
   // explore extensions
   static const String cuisineDetail = '/explore/cuisine-detail';
   static const String surpriseMe = '/explore/surprise-me';
+  static const String exploreForYou = '/explore/for-you';
+  static const String searchResults = '/explore/search-results';
 
   // shopping module
   static const String shoppingList = '/shopping-list';
