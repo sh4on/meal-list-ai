@@ -25,13 +25,18 @@ import '../modules/pantry/bindings/pantry_binding.dart';
 import '../modules/pantry/screens/add_to_pantry_screen.dart';
 import '../modules/pantry/screens/my_pantry_screen.dart';
 import '../modules/pantry/screens/what_can_i_cook_screen.dart';
+import '../modules/profile/screens/account_settings_screen.dart';
+import '../modules/profile/screens/add_household_member_screen.dart';
+import '../modules/profile/screens/app_settings_screen.dart';
 import '../modules/profile/screens/food_preferences_screen.dart';
 import '../modules/profile/screens/manage_allergies_screen.dart';
+import '../modules/profile/screens/manage_household_screen.dart';
 import '../modules/profile/screens/manage_subscription_screen.dart';
 import '../modules/profile/screens/my_goals_screen.dart';
 import '../modules/profile/screens/nutrition_targets_screen.dart';
 import '../modules/profile/screens/personal_info_screen.dart';
 import '../modules/profile/screens/progress_insights_screen.dart';
+import '../modules/profile/screens/share_your_week_screen.dart';
 import '../modules/recipes/bindings/recipe_creator_binding.dart';
 import '../modules/recipes/screens/add_recipe_screen.dart';
 import '../modules/recipes/screens/create_recipe_wizard_screen.dart';
@@ -255,6 +260,31 @@ abstract final class AppPages {
     GetPage(
       name: AppRoutes.manageSubscription,
       page: ManageSubscriptionScreen.new,
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.manageHousehold,
+      page: ManageHouseholdScreen.new,
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.addHouseholdMember,
+      page: AddHouseholdMemberScreen.new,
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.appSettings,
+      page: AppSettingsScreen.new,
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.accountSettings,
+      page: AccountSettingsScreen.new,
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.shareYourWeek,
+      page: ShareYourWeekScreen.new,
       transition: Transition.rightToLeft,
     ),
   ];

@@ -19,12 +19,21 @@ class ProfileScreen extends GetView<ProfileController> {
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: AppColors.bg,
         leading: const Padding(
           padding: EdgeInsets.only(left: 16),
-          child: Icon(Icons.restaurant, color: AppColors.textPrimary),
+          child: Icon(
+            Icons.restaurant_menu_outlined,
+            color: AppColors.textPrimary,
+          ),
         ),
-        title: const Text('Mealist.ai', style: AppTextStyles.logoMark),
+        title: Text(
+          'Mealist.ai',
+          style: AppTextStyles.logoMark.copyWith(
+            fontSize: 22,
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(
@@ -203,7 +212,10 @@ class _MealPlanDnaCard extends StatelessWidget {
           SizedBox(height: AppSpacing.md.h),
 
           // view progress cta
-          PrimaryButtonWidget(label: 'View Progress', onTap: () {}),
+          PrimaryButtonWidget(
+            label: 'View Progress',
+            onTap: () => Get.toNamed(AppRoutes.progressInsights),
+          ),
         ],
       ),
     );
@@ -295,6 +307,9 @@ class _SettingsSection extends StatelessWidget {
                         case 'ALLERGIES & RESTRICTIONS':
                           Get.toNamed(AppRoutes.manageAllergies);
                           break;
+                        case 'HOUSEHOLD':
+                          Get.toNamed(AppRoutes.manageHousehold);
+                          break;
                         case 'PERSONAL INFO':
                           Get.toNamed(AppRoutes.personalInfo);
                           break;
@@ -303,6 +318,9 @@ class _SettingsSection extends StatelessWidget {
                           break;
                         case 'SUBSCRIPTION':
                           Get.toNamed(AppRoutes.manageSubscription);
+                          break;
+                        case 'APP SETTINGS':
+                          Get.toNamed(AppRoutes.appSettings);
                           break;
                       }
                     },
@@ -332,13 +350,15 @@ class _SettingsSection extends StatelessWidget {
     return switch (key) {
       'flag' => Icons.flag_outlined,
       'nutrition' => Icons.monitor_weight_outlined,
-      'restaurant' => Icons.restaurant_menu_outlined,
-      'block' => Icons.block_outlined,
+      'restaurant' => Icons.restaurant,
+      'block' => Icons.remove_circle_outline,
+      'people' => Icons.people_outline,
       'person' => Icons.person_outline,
-      'star' => Icons.star_outline,
+      'star' => Icons.stars_outlined,
       'insights' => Icons.insights_outlined,
       'settings' => Icons.settings_outlined,
       _ => Icons.chevron_right,
     };
   }
 }
+

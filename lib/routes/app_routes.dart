@@ -56,4 +56,10 @@ abstract final class AppRoutes {
   static const String manageAllergies = '/profile/manage-allergies';
   static const String foodPreferences = '/profile/food-preferences';
   static const String manageSubscription = '/profile/subscription';
+  static const String manageHousehold = '/profile/household';
+  static const String addHouseholdMember = '/profile/household/add';
+  static const String appSettings = '/profile/app-settings';
+  static const String accountSettings = '/profile/account-settings';
+  static const String shareYourWeek = '/profile/share-your-week';
 }
+

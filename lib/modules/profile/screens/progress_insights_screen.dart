@@ -5,6 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../routes/app_routes.dart';
 
 // progress & insights screen
 // visualizes plan adherence, weekly cooking stats, streaks, and smart habits
@@ -238,15 +239,7 @@ class ProgressInsightsScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                onPressed: () {
-                  Get.snackbar(
-                    'Shared!',
-                    'Weekly summary copied to clipboard.',
-                    backgroundColor: AppColors.white,
-                    snackPosition: SnackPosition.BOTTOM,
-                    margin: const EdgeInsets.all(AppSpacing.md),
-                  );
-                },
+                onPressed: () => Get.toNamed(AppRoutes.shareYourWeek),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: AppColors.white,

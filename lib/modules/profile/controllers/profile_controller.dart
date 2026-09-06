@@ -11,11 +11,11 @@ class ProfileController extends GetxController {
     {'icon': 'nutrition', 'label': 'NUTRITION TARGETS'},
     {'icon': 'restaurant', 'label': 'FOOD PREFERENCES'},
     {'icon': 'block', 'label': 'ALLERGIES & RESTRICTIONS'},
+    {'icon': 'people', 'label': 'HOUSEHOLD'},
     {'icon': 'person', 'label': 'PERSONAL INFO'},
   ];
 
   final List<Map<String, String>> accountItems = const [
-    {'icon': 'insights', 'label': 'PROGRESS & INSIGHTS'},
     {'icon': 'star', 'label': 'SUBSCRIPTION'},
     {'icon': 'settings', 'label': 'APP SETTINGS'},
   ];

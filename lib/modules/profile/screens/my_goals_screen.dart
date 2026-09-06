@@ -5,10 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../shared/common_widgets/primary_button_widget.dart';
 
-// my goals settings screen
-// lets user refine their target objective and daily meal frequency
 class MyGoalsScreen extends StatefulWidget {
   const MyGoalsScreen({super.key});
 
@@ -17,18 +14,41 @@ class MyGoalsScreen extends StatefulWidget {
 }
 
 class _MyGoalsScreenState extends State<MyGoalsScreen> {
-  String _selectedGoal = 'Lose weight';
-  double _calorieTarget = 1850;
-  int _mealsPerDay = 3;
+  String _primaryGoal = 'Eat healthier';
+  final Set<String> _otherGoals = {'Try new cuisines'};
 
-  final List<Map<String, String>> _goals = [
+  final List<Map<String, dynamic>> _primaryGoalOptions = [
+    {
+      'title': 'Eat healthier',
+      'icon': Icons.add_moderator_outlined,
+    },
     {
       'title': 'Lose weight',
-      'desc': 'Calorie deficit with high protein saturation',
+      'icon': Icons.hourglass_empty,
     },
-    {'title': 'Maintain weight', 'desc': 'Balanced macronutrient distribution'},
-    {'title': 'Gain muscle', 'desc': 'Protein-dense surplus meals'},
-    {'title': 'Eat healthier', 'desc': 'Unprocessed whole food focus'},
+    {
+      'title': 'Build muscle',
+      'icon': Icons.fitness_center,
+    },
+    {
+      'title': 'Save money',
+      'icon': Icons.savings_outlined,
+    },
+  ];
+
+  final List<Map<String, dynamic>> _otherGoalOptions = [
+    {
+      'title': 'Try new cuisines',
+      'icon': Icons.restaurant,
+    },
+    {
+      'title': 'Cook faster',
+      'icon': Icons.timer_outlined,
+    },
+    {
+      'title': 'Use pantry ingredients',
+      'icon': Icons.inventory_2_outlined,
+    },
   ];
 
   @override
@@ -36,70 +56,197 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: AppColors.bg,
+        elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-          onPressed: Get.back,
+          onPressed: () => Get.back(),
         ),
-        title: const Text('My Goals', style: AppTextStyles.headlineSmall),
-        centerTitle: true,
+        title: Text(
+          'My Goals',
+          style: AppTextStyles.titleLarge.copyWith(
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF264E3E),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w),
+        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: AppSpacing.xs.h),
-            Text(
-              'Choose your primary nutritional objective.',
-              style: AppTextStyles.bodyMedium.copyWith(
-                color: AppColors.textSecondary,
+            Center(
+              child: Text(
+                'Choose what matters most to you.',
+                style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
               ),
             ),
-            SizedBox(height: AppSpacing.lg.h),
+            SizedBox(height: AppSpacing.xl.h),
 
-            // goals list
-            ..._goals.map((final item) {
-              final bool isSelected = _selectedGoal == item['title'];
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedGoal = item['title']!;
-                  });
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.all(AppSpacing.cardPadding),
+            // Primary goal
+            Row(
+              children: [
+                const Text(
+                  'Primary goal',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(AppRadius.md),
-                    border: Border.all(
-                      color: isSelected ? AppColors.primary : AppColors.border,
-                      width: isSelected ? 1.5 : 1,
+                    color: const Color(0xFF2E634F),
+                    borderRadius: BorderRadius.circular(AppRadius.pill),
+                  ),
+                  child: const Text(
+                    'SELECT 1',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item['title']!,
-                              style: AppTextStyles.titleMedium,
-                            ),
-                            const SizedBox(height: 2),
-                            Text(item['desc']!, style: AppTextStyles.bodySmall),
-                          ],
-                        ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppSpacing.md.h),
+
+            // 2x2 Grid
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 1.4,
+              ),
+              itemCount: _primaryGoalOptions.length,
+              itemBuilder: (context, index) {
+                final item = _primaryGoalOptions[index];
+                final isSelected = _primaryGoal == item['title'];
+                return InkWell(
+                  onTap: () => setState(() => _primaryGoal = item['title']),
+                  borderRadius: BorderRadius.circular(AppRadius.md),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(AppRadius.md),
+                      border: Border.all(
+                        color: isSelected ? const Color(0xFF2E634F) : AppColors.border,
+                        width: isSelected ? 1.8 : 1,
                       ),
-                      if (isSelected)
-                        const Icon(
-                          Icons.check_circle,
-                          color: AppColors.primary,
-                          size: 22,
+                    ),
+                    child: Stack(
+                      children: [
+                        if (isSelected)
+                          const Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Icon(
+                              Icons.check_circle,
+                              color: Color(0xFF2E634F),
+                              size: 18,
+                            ),
+                          ),
+                        Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                item['icon'] as IconData,
+                                color: isSelected ? const Color(0xFF2E634F) : AppColors.textPrimary,
+                                size: 26,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                item['title'] as String,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: isSelected ? const Color(0xFF2E634F) : AppColors.textPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                    ],
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+
+            SizedBox(height: AppSpacing.sectionGap.h),
+
+            // Other goals
+            const Text(
+              'Other goals',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
+            ),
+            SizedBox(height: AppSpacing.md.h),
+
+            ..._otherGoalOptions.map((item) {
+              final isChecked = _otherGoals.contains(item['title']);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (isChecked) {
+                        _otherGoals.remove(item['title']);
+                      } else {
+                        _otherGoals.add(item['title']);
+                      }
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(AppRadius.md),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(AppRadius.md),
+                      border: Border.all(
+                        color: isChecked ? const Color(0xFF2E634F) : AppColors.border,
+                        width: isChecked ? 1.5 : 1,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          item['icon'] as IconData,
+                          size: 20,
+                          color: const Color(0xFF2E634F),
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          item['title'] as String,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textPrimary,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Icon(
+                          isChecked ? Icons.check_box_outlined : Icons.check_box_outline_blank,
+                          size: 20,
+                          color: isChecked ? const Color(0xFF2E634F) : AppColors.textTertiary,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -107,119 +254,31 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
 
             SizedBox(height: AppSpacing.lg.h),
 
-            // calorie target slider
+            // Sparkle Callout
             Container(
-              padding: const EdgeInsets.all(AppSpacing.cardPadding),
+              width: double.infinity,
+              padding: const EdgeInsets.all(AppSpacing.cardPaddingLg),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: const Color(0xFFFAF4ED),
                 borderRadius: BorderRadius.circular(AppRadius.md),
-                border: Border.all(color: AppColors.border),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Daily Calorie Target',
-                        style: AppTextStyles.titleMedium,
-                      ),
-                      Text(
-                        '${_calorieTarget.toInt()} kcal',
-                        style: AppTextStyles.titleMedium.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Slider(
-                    value: _calorieTarget,
-                    min: 1200,
-                    max: 3500,
-                    divisions: 46,
-                    activeColor: AppColors.primary,
-                    inactiveColor: AppColors.progressTrack,
-                    onChanged: (final double val) {
-                      setState(() {
-                        _calorieTarget = val;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: AppSpacing.md.h),
-
-            // meals per day selector
-            Container(
-              padding: const EdgeInsets.all(AppSpacing.cardPadding),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(AppRadius.md),
-                border: Border.all(color: AppColors.border),
+                border: Border.all(color: const Color(0xFFEBDDCF)),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Planned Meals Per Day',
-                    style: AppTextStyles.titleMedium,
-                  ),
-                  Row(
-                    children: [3, 4, 5].map((final int m) {
-                      final bool isSelected = _mealsPerDay == m;
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _mealsPerDay = m;
-                          });
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 8),
-                          width: 36.w,
-                          height: 36.w,
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? AppColors.primary
-                                : AppColors.cardBgSecondary,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Text(
-                              '$m',
-                              style: AppTextStyles.labelMedium.copyWith(
-                                color: isSelected
-                                    ? AppColors.white
-                                    : AppColors.textPrimary,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                  const Icon(Icons.auto_awesome, color: Color(0xFFD48B47), size: 22),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Your primary goal has the strongest influence on your recommendations. Other goals help break ties.',
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: const Color(0xFF6B4A34),
+                        height: 1.4,
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-
-            SizedBox(height: AppSpacing.xl.h),
-
-            PrimaryButtonWidget(
-              label: 'Save Changes',
-              onTap: () {
-                Get.back();
-                Get.snackbar(
-                  'Saved!',
-                  'Nutrition goal set to $_selectedGoal.',
-                  backgroundColor: AppColors.white,
-                  snackPosition: SnackPosition.BOTTOM,
-                  margin: const EdgeInsets.all(AppSpacing.md),
-                );
-              },
             ),
 
             SizedBox(height: AppSpacing.xxxl.h),
