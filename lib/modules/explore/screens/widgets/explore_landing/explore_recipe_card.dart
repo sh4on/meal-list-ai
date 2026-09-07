@@ -140,10 +140,10 @@ class ExploreRecipeCard extends StatelessWidget {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFEBF5ED),
-                      borderRadius: BorderRadius.circular(AppRadius.pill),
+                      color: AppColors.accent.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(AppRadius.sm),
                       border: Border.all(
-                        color: const Color(0xFF3B6E59).withValues(alpha: 0.2),
+                        color: AppColors.accent,
                       ),
                     ),
                     child: Row(
@@ -152,17 +152,17 @@ class ExploreRecipeCard extends StatelessWidget {
                         const Icon(
                           Icons.auto_awesome,
                           size: 11,
-                          color: Color(0xFF3B6E59),
+                          color: AppColors.accent,
                         ),
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(
                             recipe['tag'] ?? '',
                             style: AppTextStyles.labelSmall.copyWith(
-                              color: const Color(0xFF234B3C),
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.textSecondary,
                             ),
-                            maxLines: 1,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

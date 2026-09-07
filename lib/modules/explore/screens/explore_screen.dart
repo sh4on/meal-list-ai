@@ -24,6 +24,7 @@ class ExploreScreen extends GetView<ExploreController> {
           slivers: [
             // top bar with utensils icon + logo + avatar
             SliverAppBar(
+              centerTitle: true,
               backgroundColor: AppColors.bg,
               floating: true,
               snap: true,
@@ -31,9 +32,13 @@ class ExploreScreen extends GetView<ExploreController> {
               scrolledUnderElevation: 0,
               leading: const Padding(
                 padding: EdgeInsets.only(left: 16),
-                child: Icon(Icons.restaurant, color: AppColors.textPrimary),
+                child:
+                    Icon(Icons.restaurant_menu, color: AppColors.textPrimary),
               ),
-              title: const Text('Mealist.ai', style: AppTextStyles.logoMark),
+              title: Text(
+                'Mealist.ai',
+                style: AppTextStyles.logoMark.copyWith(fontSize: 22),
+              ),
               actions: [
                 Padding(
                   padding: EdgeInsets.only(right: AppSpacing.md.w),
@@ -108,7 +113,8 @@ class ExploreScreen extends GetView<ExploreController> {
                             Get.toNamed(
                               AppRoutes.searchResults,
                               arguments: {
-                                'query': 'High-protein chicken under 30 minutes',
+                                'query':
+                                    'High-protein chicken under 30 minutes',
                               },
                             );
                           },
@@ -131,7 +137,6 @@ class ExploreScreen extends GetView<ExploreController> {
                       'Try: "High-protein chicken under 30 minutes"',
                       style: AppTextStyles.bodySmall.copyWith(
                         fontStyle: FontStyle.italic,
-                        color: const Color(0xFF3B6E59),
                         fontWeight: FontWeight.w500,
                       ),
                     ),

@@ -261,23 +261,13 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
-                          children: [
-                            Icon(
-                              Icons.kitchen_outlined,
-                              size: 20,
-                              color: Color(0xFF3B6E59),
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              'In your pantry',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.textPrimary,
-                              ),
-                            ),
-                          ],
+                       const  Text(
+                          'In your pantry',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.textPrimary,
+                          ),
                         ),
                         const SizedBox(height: 12),
                         const RecipePantryCheckItem(

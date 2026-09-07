@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_radius.dart';
 import '../../../../../core/constants/app_spacing.dart';
-import '../../../../../core/constants/app_text_styles.dart';
 import '../../../../../routes/app_routes.dart';
 
 // horizontal card highlighting expiring pantry ingredients
@@ -16,6 +15,70 @@ class ForYouUseItUpCard extends StatelessWidget {
     super.key,
     required this.item,
   });
+
+  // build rich text for "Uses your remaining spinach and mushrooms." with bold words
+  Widget _buildUsesText(String uses, String? boldWordsRaw) {
+    if (boldWordsRaw == null || boldWordsRaw.isEmpty) {
+      return Text(
+        uses,
+        style: const TextStyle(
+          fontSize: 11,
+          color: AppColors.textSecondary,
+          height: 1.4,
+        ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
+    final List<String> boldWords =
+        boldWordsRaw.split(',').map((s) => s.trim()).toList();
+    final List<InlineSpan> spans = [];
+    String remaining = uses;
+
+    while (remaining.isNotEmpty) {
+      int earliestIndex = remaining.length;
+      String? matchedWord;
+
+      for (final String word in boldWords) {
+        final int idx = remaining.indexOf(word);
+        if (idx != -1 && idx < earliestIndex) {
+          earliestIndex = idx;
+          matchedWord = word;
+        }
+      }
+
+      if (matchedWord == null) {
+        spans.add(TextSpan(text: remaining));
+        break;
+      }
+
+      if (earliestIndex > 0) {
+        spans.add(TextSpan(text: remaining.substring(0, earliestIndex)));
+      }
+      spans.add(TextSpan(
+        text: matchedWord,
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+          color: AppColors.textPrimary,
+        ),
+      ),
+      );
+      remaining = remaining.substring(earliestIndex + matchedWord.length);
+    }
+
+    return RichText(
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 11,
+          color: AppColors.textSecondary,
+          height: 1.4,
+        ),
+        children: spans,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +93,7 @@ class ForYouUseItUpCard extends StatelessWidget {
         },
       ),
       child: Container(
-        width: 170.w,
+        width: 165.w,
         margin: const EdgeInsets.only(right: AppSpacing.md),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -48,9 +111,9 @@ class ForYouUseItUpCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: item['image'] ?? '',
                 width: double.infinity,
-                height: 100.h,
-                memCacheWidth: 340,
-                memCacheHeight: 200,
+                height: 110.h,
+                memCacheWidth: 330,
+                memCacheHeight: 220,
                 fit: BoxFit.cover,
                 placeholder: (_, __) => Container(
                   color: AppColors.shimmerBase,
@@ -60,50 +123,30 @@ class ForYouUseItUpCard extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item['title'] ?? '',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFBE9E7),
-                      borderRadius: BorderRadius.circular(AppRadius.xs),
-                    ),
-                    child: Text(
-                      item['ingredient'] ?? '',
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['title'] ?? '',
                       style: const TextStyle(
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFFD84315),
+                        color: AppColors.textPrimary,
+                        height: 1.3,
                       ),
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    item['expiry'] ?? '',
-                    style: AppTextStyles.labelSmall.copyWith(
-                      color: AppColors.textSecondary,
+                    const SizedBox(height: 4),
+                    _buildUsesText(
+                      item['uses'] ?? '',
+                      item['boldWords'],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -112,3 +155,4 @@ class ForYouUseItUpCard extends StatelessWidget {
     );
   }
 }
+

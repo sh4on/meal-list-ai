@@ -24,9 +24,9 @@ class ForYouNudgeBanner extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Icon(
-            Icons.lightbulb_outline,
+            Icons.auto_awesome,
             color: Color(0xFFD97706),
-            size: 20,
+            size: 18,
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -34,12 +34,11 @@ class ForYouNudgeBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "TODAY'S NUDGE",
+                  "Today's Nudge",
                   style: TextStyle(
                     fontSize: 11,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0.8,
-                    color: Color(0xFFB45309),
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.2,
                   ),
                 ),
                 const SizedBox(height: 3),
@@ -51,13 +50,14 @@ class ForYouNudgeBanner extends StatelessWidget {
                       height: 1.35,
                     ),
                     children: [
+                      TextSpan(text: "You're "),
                       TextSpan(
-                        text: 'High-protein dinner needed',
+                        text: '38g',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextSpan(
                         text:
-                            " — you're 28g short of your daily goal. These recommendations fill the gap.",
+                            ' short of today\'s protein goal. These recipes will help you hit it.',
                       ),
                     ],
                   ),
