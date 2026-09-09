@@ -27,6 +27,8 @@ import '../modules/pantry/bindings/pantry_binding.dart';
 import '../modules/pantry/screens/add_to_pantry_screen.dart';
 import '../modules/pantry/screens/my_pantry_screen.dart';
 import '../modules/pantry/screens/what_can_i_cook_screen.dart';
+import '../modules/plan/screens/building_plan_screen.dart';
+import '../modules/plan/screens/replace_meal_screen.dart';
 import '../modules/profile/screens/account_settings_screen.dart';
 import '../modules/profile/screens/add_household_member_screen.dart';
 import '../modules/profile/screens/app_settings_screen.dart';
@@ -45,6 +47,7 @@ import '../modules/recipes/screens/create_recipe_wizard_screen.dart';
 import '../modules/recipes/screens/import_from_link_screen.dart';
 import '../modules/recipes/screens/recipe_details_screen.dart';
 import '../modules/shopping/bindings/shopping_binding.dart';
+import '../modules/shopping/screens/finish_shopping_screen.dart';
 import '../modules/shopping/screens/shopping_list_screen.dart';
 import '../modules/shopping/screens/shopping_mode_screen.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -131,6 +134,16 @@ abstract final class AppPages {
       page: MainShellScreen.new,
       binding: MainShellBinding(),
       transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.buildingPlan,
+      page: BuildingPlanScreen.new,
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.replaceMeal,
+      page: ReplaceMealScreen.new,
+      transition: Transition.rightToLeft,
     ),
 
     // pantry module
@@ -236,6 +249,11 @@ abstract final class AppPages {
       name: AppRoutes.shoppingMode,
       page: ShoppingModeScreen.new,
       transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: AppRoutes.finishShopping,
+      page: FinishShoppingScreen.new,
+      transition: Transition.fadeIn,
     ),
 
     // profile & settings sub-screens

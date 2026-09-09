@@ -41,13 +41,17 @@ class _ShareYourWeekScreenState extends State<ShareYourWeekScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               'Choose exactly what you want to share.',
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.bodyMedium
+                  .copyWith(color: AppColors.textSecondary),
             ),
             SizedBox(height: AppSpacing.lg.h),
 
@@ -127,7 +131,11 @@ class _ShareYourWeekScreenState extends State<ShareYourWeekScreen> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.local_fire_department, color: Color(0xFFE08744), size: 24),
+                      Icon(
+                        Icons.local_fire_department,
+                        color: Color(0xFFE08744),
+                        size: 24,
+                      ),
                       SizedBox(width: 4),
                       Text(
                         '4',
@@ -177,35 +185,55 @@ class _ShareYourWeekScreenState extends State<ShareYourWeekScreen> {
               child: Column(
                 children: [
                   SwitchListTile.adaptive(
-                    title: Text('Cooking progress', style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+                    title: Text(
+                      'Cooking progress',
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
                     value: _shareCookingProgress,
                     activeTrackColor: const Color(0xFF3B6E59),
                     onChanged: (v) => setState(() => _shareCookingProgress = v),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   SwitchListTile.adaptive(
-                    title: Text('Streak', style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+                    title: Text(
+                      'Streak',
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
                     value: _shareStreak,
                     activeTrackColor: const Color(0xFF3B6E59),
                     onChanged: (v) => setState(() => _shareStreak = v),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   SwitchListTile.adaptive(
-                    title: Text('Nutrition', style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+                    title: Text(
+                      'Nutrition',
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
                     value: _shareNutrition,
                     activeTrackColor: const Color(0xFF3B6E59),
                     onChanged: (v) => setState(() => _shareNutrition = v),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   SwitchListTile.adaptive(
-                    title: Text('Weight', style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+                    title: Text(
+                      'Weight',
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
                     value: _shareWeight,
                     activeTrackColor: const Color(0xFF3B6E59),
                     onChanged: (v) => setState(() => _shareWeight = v),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                   ),
                 ],
               ),
@@ -223,11 +251,16 @@ class _ShareYourWeekScreenState extends State<ShareYourWeekScreen> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, size: 18, color: AppColors.textSecondary),
+                  const Icon(
+                    Icons.info_outline,
+                    size: 18,
+                    color: AppColors.textSecondary,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Nutrition and weight are hidden by default.',
-                    style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.bodySmall
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                 ],
               ),
@@ -239,7 +272,10 @@ class _ShareYourWeekScreenState extends State<ShareYourWeekScreen> {
             PrimaryButtonWidget(
               label: 'Share',
               onTap: () {
-                Get.snackbar('Shared', 'Your weekly recap has been prepared for sharing!');
+                Get.snackbar(
+                  'Shared',
+                  'Your weekly recap has been prepared for sharing!',
+                );
               },
             ),
 

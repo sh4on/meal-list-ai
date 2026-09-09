@@ -11,11 +11,11 @@ import '../../recipes/controllers/recipes_controller.dart';
 class MainShellBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<BottomNavController>(BottomNavController.new, fenix: true);
-    Get.lazyPut<HomeController>(HomeController.new, fenix: true);
-    Get.lazyPut<PlanController>(PlanController.new, fenix: true);
-    Get.lazyPut<RecipesController>(RecipesController.new, fenix: true);
-    Get.lazyPut<ExploreController>(ExploreController.new, fenix: true);
-    Get.lazyPut<ProfileController>(ProfileController.new, fenix: true);
+    Get.put<BottomNavController>(BottomNavController(), permanent: true);
+    Get.put<HomeController>(HomeController(), permanent: true);
+    Get.put<PlanController>(PlanController(), permanent: true);
+    Get.put<RecipesController>(RecipesController(), permanent: true);
+    Get.put<ExploreController>(ExploreController(), permanent: true);
+    Get.put<ProfileController>(ProfileController(), permanent: true);
   }
 }

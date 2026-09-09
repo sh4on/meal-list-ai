@@ -41,7 +41,7 @@ class QuickActionsWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: AppSpacing.sm,
         ),
         _ActionButton(

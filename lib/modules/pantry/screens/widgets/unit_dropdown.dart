@@ -12,7 +12,8 @@ class UnitDropdown extends StatelessWidget {
   final String selectedUnit;
   final ValueChanged<String?> onChanged;
 
-  const UnitDropdown({super.key,
+  const UnitDropdown({
+    super.key,
     required this.units,
     required this.selectedUnit,
     required this.onChanged,

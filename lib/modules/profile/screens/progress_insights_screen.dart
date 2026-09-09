@@ -93,8 +93,10 @@ class ProgressInsightsScreen extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          const Text('This Week',
-                              style: AppTextStyles.labelSmall,),
+                          const Text(
+                            'This Week',
+                            style: AppTextStyles.labelSmall,
+                          ),
                         ],
                       ),
                     ],
@@ -263,7 +265,3 @@ class ProgressInsightsScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-

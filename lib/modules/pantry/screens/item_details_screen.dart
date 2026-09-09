@@ -40,8 +40,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
     super.initState();
     _qtyController =
         TextEditingController(text: widget.item['qty']?.toString() ?? '1');
-    _selectedStorage =
-        (widget.item['storedIn'] as String?) ?? 'Pantry';
+    _selectedStorage = (widget.item['storedIn'] as String?) ?? 'Pantry';
     _unit = (widget.item['unit'] as String?) ?? 'g';
     final String? useByStr = widget.item['useBy'] as String?;
     if (useByStr != null) {
@@ -72,8 +71,18 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
     final DateTime? dt = DateTime.tryParse(raw);
     if (dt == null) return raw;
     const List<String> months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[dt.month - 1]} ${dt.day}, ${dt.year}';
   }
@@ -227,8 +236,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                         child: StorageToggleChip(
                           label: s,
                           isSelected: isSel,
-                          onTap: () =>
-                              setState(() => _selectedStorage = s),
+                          onTap: () => setState(() => _selectedStorage = s),
                         ),
                       );
                     }).toList(),
@@ -344,15 +352,3 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

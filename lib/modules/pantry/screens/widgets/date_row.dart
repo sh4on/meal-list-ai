@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/constants/app_colors.dart';
-import '../../../../core/constants/app_radius.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/constants/app_text_styles.dart';
 
@@ -16,6 +13,7 @@ class DateRow extends StatelessWidget {
   final bool isEditable;
 
   const DateRow({
+    super.key,
     required this.label,
     required this.value,
     required this.hasWarning,

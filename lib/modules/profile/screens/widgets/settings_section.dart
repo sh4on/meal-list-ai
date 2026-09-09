@@ -14,6 +14,7 @@ class SettingsSection extends StatelessWidget {
   final List<Map<String, String>> items;
 
   const SettingsSection({
+    super.key,
     required this.sectionLabel,
     required this.items,
   });

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_radius.dart';
-import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/constants/app_text_styles.dart';
 
 // storage toggle chip
@@ -14,6 +11,7 @@ class StorageToggleChip extends StatelessWidget {
   final VoidCallback onTap;
 
   const StorageToggleChip({
+    super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,

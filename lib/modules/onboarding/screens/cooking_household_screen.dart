@@ -150,8 +150,8 @@ class CookingHouseholdScreen extends GetView<OnboardingController> {
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
                       childAspectRatio: 2.0,
-                      children:
-                          controller.householdTypes.map((Map<String, dynamic> h) {
+                      children: controller.householdTypes
+                          .map((Map<String, dynamic> h) {
                         final String label = h['label'] as String;
                         final bool isSelected =
                             controller.householdType.value == label;
@@ -163,8 +163,7 @@ class CookingHouseholdScreen extends GetView<OnboardingController> {
                               color: isSelected
                                   ? AppColors.primarySurface
                                   : AppColors.white,
-                              borderRadius:
-                                  BorderRadius.circular(AppRadius.md),
+                              borderRadius: BorderRadius.circular(AppRadius.md),
                               border: Border.all(
                                 color: isSelected
                                     ? AppColors.primary

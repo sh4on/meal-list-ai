@@ -5,13 +5,15 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_radius.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/constants/app_text_styles.dart';
+
 class InsightCard extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final Color bgColor;
   final String text;
 
-  const InsightCard({super.key,
+  const InsightCard({
+    super.key,
     required this.icon,
     required this.iconColor,
     required this.bgColor,

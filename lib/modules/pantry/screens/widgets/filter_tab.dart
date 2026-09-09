@@ -12,7 +12,8 @@ class FilterTab extends StatelessWidget {
   final VoidCallback onTap;
   final bool isFirst;
 
-  const FilterTab({super.key,
+  const FilterTab({
+    super.key,
     required this.label,
     required this.icon,
     required this.isSelected,

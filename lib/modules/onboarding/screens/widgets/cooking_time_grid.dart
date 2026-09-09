@@ -8,7 +8,8 @@ class CookingTimeGrid extends StatelessWidget {
   final String selected;
   final void Function(String) onSelect;
 
-  const CookingTimeGrid({super.key,
+  const CookingTimeGrid({
+    super.key,
     required this.times,
     required this.selected,
     required this.onSelect,

@@ -39,13 +39,17 @@ class _NutritionTargetsScreenState extends State<NutritionTargetsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               'Set targets that help guide your meal planning.',
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.bodyMedium
+                  .copyWith(color: AppColors.textSecondary),
             ),
             SizedBox(height: AppSpacing.lg.h),
 
@@ -64,7 +68,9 @@ class _NutritionTargetsScreenState extends State<NutritionTargetsScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          color: _isRecommended ? AppColors.white : Colors.transparent,
+                          color: _isRecommended
+                              ? AppColors.white
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(AppRadius.md - 2),
                           boxShadow: _isRecommended
                               ? [
@@ -81,7 +87,9 @@ class _NutritionTargetsScreenState extends State<NutritionTargetsScreen> {
                             'Recommended',
                             style: TextStyle(
                               color: AppColors.textPrimary,
-                              fontWeight: _isRecommended ? FontWeight.bold : FontWeight.w500,
+                              fontWeight: _isRecommended
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
                               fontSize: 13,
                             ),
                           ),
@@ -95,7 +103,9 @@ class _NutritionTargetsScreenState extends State<NutritionTargetsScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          color: !_isRecommended ? AppColors.white : Colors.transparent,
+                          color: !_isRecommended
+                              ? AppColors.white
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(AppRadius.md - 2),
                           boxShadow: !_isRecommended
                               ? [
@@ -112,7 +122,9 @@ class _NutritionTargetsScreenState extends State<NutritionTargetsScreen> {
                             'Custom',
                             style: TextStyle(
                               color: AppColors.textPrimary,
-                              fontWeight: !_isRecommended ? FontWeight.bold : FontWeight.w500,
+                              fontWeight: !_isRecommended
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
                               fontSize: 13,
                             ),
                           ),
@@ -185,7 +197,8 @@ class _NutritionTargetsScreenState extends State<NutritionTargetsScreen> {
                   SizedBox(height: AppSpacing.md.h),
                   Text(
                     'Personal information is optional.',
-                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.textTertiary),
+                    style: AppTextStyles.labelSmall
+                        .copyWith(color: AppColors.textTertiary),
                   ),
                 ],
               ),
@@ -221,7 +234,8 @@ class _NutritionTargetsScreenState extends State<NutritionTargetsScreen> {
                         const SizedBox(height: 4),
                         Text(
                           'Hide calories and macro information throughout Mealist.',
-                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                          style: AppTextStyles.bodySmall
+                              .copyWith(color: AppColors.textSecondary),
                         ),
                       ],
                     ),

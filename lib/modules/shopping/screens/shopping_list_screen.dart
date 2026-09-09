@@ -6,11 +6,12 @@ import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../routes/app_routes.dart';
-import '../../../shared/common_widgets/primary_button_widget.dart';
 import '../controllers/shopping_controller.dart';
+import 'widgets/shopping_list/shopping_category_section.dart';
+import 'widgets/shopping_list/shopping_collected_item.dart';
+import 'widgets/shopping_list/smart_pantry_banner.dart';
 
-// shopping list screen — matches figma: aisle/recipe tab, smart pantry banner,
-// grouped items with checkboxes, collected items section, start shopping cta
+// Shopping List Screen -- clean architecture with separated widgets
 class ShoppingListScreen extends GetView<ShoppingController> {
   const ShoppingListScreen({super.key});
 
@@ -20,13 +21,17 @@ class ShoppingListScreen extends GetView<ShoppingController> {
       backgroundColor: AppColors.bg,
       appBar: AppBar(
         backgroundColor: AppColors.bg,
+        elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: Get.back,
         ),
         title: const Column(
           children: [
-            Text('Shopping List', style: AppTextStyles.headlineSmall),
+            Text(
+              'Shopping List',
+              style: AppTextStyles.headlineSmall,
+            ),
             Text(
               'Generated from your planned meals',
               style: AppTextStyles.bodySmall,
@@ -43,11 +48,11 @@ class ShoppingListScreen extends GetView<ShoppingController> {
       ),
       body: Column(
         children: [
-          // tab bar — By Aisle / By Recipe
+          // ── Tab toggle: By Aisle / By Recipe ───────────────────────────
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSpacing.screenH.w,
-              vertical: AppSpacing.sm.h,
+              vertical: AppSpacing.xs.h,
             ),
             child: Obx(
               () => Container(
@@ -56,30 +61,44 @@ class ShoppingListScreen extends GetView<ShoppingController> {
                   borderRadius: BorderRadius.circular(AppRadius.md),
                   border: Border.all(color: AppColors.border),
                 ),
+                padding: const EdgeInsets.all(3),
                 child: Row(
                   children: controller.tabs.asMap().entries.map((entry) {
-                    final bool isSelected =
-                        controller.selectedTab.value == entry.key;
+                    final int idx = entry.key;
+                    final String tab = entry.value;
+                    final bool isSelected = controller.selectedTab.value == idx;
                     return Expanded(
                       child: GestureDetector(
-                        onTap: () => controller.switchTab(entry.key),
+                        onTap: () => controller.switchTab(idx),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          margin: const EdgeInsets.all(4),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? AppColors.white
                                 : Colors.transparent,
                             borderRadius: BorderRadius.circular(AppRadius.sm),
+                            boxShadow: isSelected
+                                ? [
+                                    BoxShadow(
+                                      color:
+                                          Colors.black.withValues(alpha: 0.06),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 1),
+                                    ),
+                                  ]
+                                : null,
                           ),
                           child: Text(
-                            entry.value,
+                            tab,
                             textAlign: TextAlign.center,
                             style: AppTextStyles.titleSmall.copyWith(
                               color: isSelected
                                   ? AppColors.textPrimary
                                   : AppColors.textSecondary,
+                              fontWeight: isSelected
+                                  ? FontWeight.w600
+                                  : FontWeight.w500,
                             ),
                           ),
                         ),
@@ -91,7 +110,7 @@ class ShoppingListScreen extends GetView<ShoppingController> {
             ),
           ),
 
-          // scrollable list
+          // ── Scrollable body ─────────────────────────────────────────────
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w),
@@ -100,87 +119,109 @@ class ShoppingListScreen extends GetView<ShoppingController> {
                 children: [
                   SizedBox(height: AppSpacing.sm.h),
 
-                  // smart pantry applied banner
-                  Container(
-                    padding: const EdgeInsets.all(AppSpacing.md),
-                    decoration: BoxDecoration(
-                      color: AppColors.accentSurface,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                      border: Border.all(
-                        color: AppColors.accent.withValues(alpha: 0.3),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.auto_awesome,
-                          color: AppColors.accent,
-                          size: AppSpacing.iconMd,
-                        ),
-                        SizedBox(width: AppSpacing.md.w),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Smart Pantry Applied',
-                                style: AppTextStyles.titleSmall.copyWith(
-                                  color: AppColors.textPrimary,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              const Text(
-                                'We subtracted items you already have based on your last pantry update.',
-                                style: AppTextStyles.bodySmall,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  // Smart Pantry Applied banner
+                  const SmartPantryBanner(),
+
+                  SizedBox(height: AppSpacing.md.h),
+
+                  // Produce Category
+                  ShoppingCategorySection(
+                    title: 'Produce',
+                    icon: Icons.eco_outlined,
+                    items: const [
+                      {
+                        'name': 'Avocados',
+                        'qty': '2',
+                        'pantry': '1',
+                        'buy': '1',
+                      },
+                      {
+                        'name': 'Cherry tomatoes',
+                        'qty': '250 g',
+                        'pantry': null,
+                        'buy': null,
+                      },
+                      {
+                        'name': 'Baby spinach',
+                        'qty': '100 g',
+                        'pantry': '50 g',
+                        'buy': '50 g',
+                      },
+                    ],
+                    onItemCollected: controller.collectItem,
                   ),
 
-                  SizedBox(height: AppSpacing.lg.h),
+                  SizedBox(height: AppSpacing.md.h),
 
-                  // category groups
-                  Obx(
-                    () => Column(
-                      children: controller.categories
-                          .asMap()
-                          .entries
-                          .map(
-                            (MapEntry<int, Map<String, dynamic>> catEntry) =>
-                                _CategorySection(
-                              catIndex: catEntry.key,
-                              category: catEntry.value,
-                              controller: controller,
-                            ),
-                          )
-                          .toList(),
-                    ),
+                  // Meat & Seafood Category
+                  ShoppingCategorySection(
+                    title: 'Meat & Seafood',
+                    icon: Icons.kebab_dining_outlined,
+                    items: const [
+                      {
+                        'name': 'Chicken breast',
+                        'qty': '800 g',
+                        'pantry': null,
+                        'buy': null,
+                      },
+                      {
+                        'name': 'Salmon fillets',
+                        'qty': '2 portions',
+                        'pantry': null,
+                        'buy': null,
+                      },
+                    ],
+                    onItemCollected: controller.collectItem,
                   ),
 
-                  SizedBox(height: AppSpacing.lg.h),
+                  SizedBox(height: AppSpacing.md.h),
 
-                  // add item button
+                  // Dairy & Eggs Category
+                  ShoppingCategorySection(
+                    title: 'Dairy & Eggs',
+                    icon: Icons.egg_outlined,
+                    items: const [
+                      {
+                        'name': 'Eggs',
+                        'qty': '12',
+                        'pantry': '6',
+                        'buy': '6',
+                      },
+                      {
+                        'name': 'Greek yogurt',
+                        'qty': '500 g',
+                        'pantry': null,
+                        'buy': null,
+                      },
+                    ],
+                    onItemCollected: controller.collectItem,
+                  ),
+
+                  SizedBox(height: AppSpacing.md.h),
+
+                  // + Add Item Button
                   Center(
                     child: OutlinedButton.icon(
                       onPressed: () {},
                       icon: const Icon(
                         Icons.add,
-                        color: AppColors.textPrimary,
+                        size: 18,
+                        color: AppColors.primary,
                       ),
                       label: const Text(
                         'Add Item',
-                        style: AppTextStyles.labelLarge,
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: AppColors.border),
+                        side: const BorderSide(color: AppColors.primary),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(AppRadius.md),
                         ),
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.xl,
+                          horizontal: AppSpacing.xxl,
                           vertical: AppSpacing.sm,
                         ),
                       ),
@@ -189,7 +230,7 @@ class ShoppingListScreen extends GetView<ShoppingController> {
 
                   SizedBox(height: AppSpacing.lg.h),
 
-                  // collected items
+                  // COLLECTED section
                   Obx(
                     () => Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,232 +240,50 @@ class ShoppingListScreen extends GetView<ShoppingController> {
                           style: AppTextStyles.sectionHeader,
                         ),
                         SizedBox(height: AppSpacing.sm.h),
-                        ...controller.collectedItems.map(
-                          (String item) => _CollectedItem(name: item),
-                        ),
+                        ...controller.collectedItems
+                            .map((item) => ShoppingCollectedItem(name: item)),
                       ],
                     ),
                   ),
 
-                  SizedBox(height: AppSpacing.xxxl.h),
+                  SizedBox(height: 100.h),
                 ],
               ),
             ),
           ),
 
-          // start shopping cta at bottom
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-              AppSpacing.screenH.w,
-              AppSpacing.md.h,
-              AppSpacing.screenH.w,
-              AppSpacing.xl.h,
-            ),
-            child: PrimaryButtonWidget(
-              label: 'Start Shopping →',
-              onTap: () => Get.toNamed(AppRoutes.shoppingMode),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// category group section with header and items
-class _CategorySection extends StatelessWidget {
-  final int catIndex;
-  final Map<String, dynamic> category;
-  final ShoppingController controller;
-
-  const _CategorySection({
-    required this.catIndex,
-    required this.category,
-    required this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final List<dynamic> items = category['items'] as List<dynamic>;
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        children: [
-          // category header
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
-            ),
-            child: Row(
-              children: [
-                Text(category['icon'] as String),
-                const SizedBox(width: AppSpacing.xs),
-                Text(
-                  category['category'] as String,
-                  style: AppTextStyles.sectionHeader,
-                ),
-              ],
-            ),
-          ),
-          const Divider(height: 1, color: AppColors.border),
-
-          // item rows
-          ...items.asMap().entries.map(
-            (MapEntry<int, dynamic> itemEntry) {
-              final Map<String, dynamic> item =
-                  itemEntry.value as Map<String, dynamic>;
-              return _ShoppingItem(
-                item: item,
-                onToggle: () => controller.toggleItem(
-                  catIndex,
-                  itemEntry.key,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// individual shopping item row
-class _ShoppingItem extends StatelessWidget {
-  final Map<String, dynamic> item;
-  final VoidCallback onToggle;
-
-  const _ShoppingItem({required this.item, required this.onToggle});
-
-  @override
-  Widget build(BuildContext context) {
-    final bool isChecked = item['checked'] as bool? ?? false;
-    final String? buyQty = item['buy'] as String?;
-    final String? pantryQty = item['pantry'] as String?;
-
-    return InkWell(
-      onTap: onToggle,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.sm,
-        ),
-        child: Row(
-          children: [
-            // checkbox
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: 20,
-              height: 20,
-              decoration: BoxDecoration(
-                color: isChecked ? AppColors.primary : Colors.transparent,
-                borderRadius: BorderRadius.circular(AppRadius.xs),
-                border: Border.all(
-                  color: isChecked ? AppColors.primary : AppColors.border,
-                  width: 1.5,
-                ),
+          // ── Start Shopping CTA ──────────────────────────────────────────
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.screenH.w,
+                AppSpacing.sm.h,
+                AppSpacing.screenH.w,
+                AppSpacing.md.h,
               ),
-              child: isChecked
-                  ? const Icon(Icons.check, color: AppColors.white, size: 13)
-                  : null,
-            ),
-            SizedBox(width: AppSpacing.md.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item['name'] as String,
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      decoration: isChecked
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                      color: isChecked
-                          ? AppColors.textTertiary
-                          : AppColors.textPrimary,
+              child: SizedBox(
+                width: double.infinity,
+                height: AppSpacing.buttonHeight,
+                child: ElevatedButton(
+                  onPressed: () => Get.toNamed(AppRoutes.shoppingMode),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadius.md),
                     ),
                   ),
-                  if (buyQty != null)
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.successSurface,
-                            borderRadius: BorderRadius.circular(AppRadius.pill),
-                          ),
-                          child: Text(
-                            'Buy $buyQty',
-                            style: AppTextStyles.labelSmall.copyWith(
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.xs),
-                        Text(
-                          'Total-${item['qty']}',
-                          style: AppTextStyles.bodySmall,
-                        ),
-                        const SizedBox(width: AppSpacing.xs),
-                        const Icon(
-                          Icons.kitchen_outlined,
-                          size: 12,
-                          color: AppColors.textSecondary,
-                        ),
-                        const SizedBox(width: 2),
-                        Text(
-                          'Pantry $pantryQty',
-                          style: AppTextStyles.bodySmall,
-                        ),
-                      ],
-                    )
-                  else
-                    Text(item['qty'] as String, style: AppTextStyles.bodySmall),
-                ],
+                  child: const Text(
+                    'Start Shopping  →',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// already-collected item — greyed out with checkmark
-class _CollectedItem extends StatelessWidget {
-  final String name;
-  const _CollectedItem({required this.name});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-      child: Row(
-        children: [
-          Container(
-            width: 20,
-            height: 20,
-            decoration: BoxDecoration(
-              color: AppColors.textTertiary,
-              borderRadius: BorderRadius.circular(AppRadius.xs),
-            ),
-            child: const Icon(Icons.check, color: AppColors.white, size: 13),
-          ),
-          SizedBox(width: AppSpacing.md.w),
-          Text(
-            name,
-            style: AppTextStyles.bodyMedium.copyWith(
-              color: AppColors.textTertiary,
-              decoration: TextDecoration.lineThrough,
-              decorationColor: AppColors.textTertiary,
             ),
           ),
         ],

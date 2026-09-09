@@ -16,7 +16,8 @@ class RecipeCard extends StatelessWidget {
   final Map<String, dynamic> recipe;
   final VoidCallback onFavToggle;
 
-  const RecipeCard({super.key,
+  const RecipeCard({
+    super.key,
     required this.recipe,
     required this.onFavToggle,
   });
@@ -232,10 +233,11 @@ class RecipeCard extends StatelessWidget {
                       child: SizedBox(
                         height: AppSpacing.buttonHeight,
                         child: ElevatedButton.icon(
-                          onPressed: () =>
-                              Get.toNamed(AppRoutes.cookMode),
-                          icon: const Icon(Icons.outdoor_grill_outlined,
-                              size: 18),
+                          onPressed: () => Get.toNamed(AppRoutes.cookMode),
+                          icon: const Icon(
+                            Icons.outdoor_grill_outlined,
+                            size: 18,
+                          ),
                           label: const Text('Cook Now'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
@@ -245,8 +247,7 @@ class RecipeCard extends StatelessWidget {
                               fontSize: 14,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(AppRadius.md),
+                              borderRadius: BorderRadius.circular(AppRadius.md),
                             ),
                           ),
                         ),

@@ -10,7 +10,8 @@ class AddHouseholdMemberScreen extends StatefulWidget {
   const AddHouseholdMemberScreen({super.key});
 
   @override
-  State<AddHouseholdMemberScreen> createState() => _AddHouseholdMemberScreenState();
+  State<AddHouseholdMemberScreen> createState() =>
+      _AddHouseholdMemberScreenState();
 }
 
 class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
@@ -47,13 +48,17 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_add_alt, color: AppColors.textPrimary),
+            icon:
+                const Icon(Icons.person_add_alt, color: AppColors.textPrimary),
             onPressed: () {},
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,7 +74,11 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                     ),
                   ),
                 ),
-                const Icon(Icons.chevron_right, size: 14, color: AppColors.textTertiary),
+                const Icon(
+                  Icons.chevron_right,
+                  size: 14,
+                  color: AppColors.textTertiary,
+                ),
                 Text(
                   'New Member Profile',
                   style: AppTextStyles.labelSmall.copyWith(
@@ -88,25 +97,49 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.badge_outlined, color: Color(0xFF2E634F), size: 20),
+                      const Icon(
+                        Icons.badge_outlined,
+                        color: Color(0xFF2E634F),
+                        size: 20,
+                      ),
                       const SizedBox(width: 8),
-                      const Text('Member Details', style: AppTextStyles.titleMedium),
+                      const Text(
+                        'Member Details',
+                        style: AppTextStyles.titleMedium,
+                      ),
                       const Spacer(),
-                      _buildPill('REQUIRED', bg: const Color(0xFFD6EDE0), fg: const Color(0xFF235843)),
+                      _buildPill(
+                        'REQUIRED',
+                        bg: const Color(0xFFD6EDE0),
+                        fg: const Color(0xFF235843),
+                      ),
                     ],
                   ),
                   SizedBox(height: AppSpacing.md.h),
-                  const Text('Full Name or Nickname', style: AppTextStyles.inputLabel),
+                  const Text(
+                    'Full Name or Nickname',
+                    style: AppTextStyles.inputLabel,
+                  ),
                   const SizedBox(height: 6),
                   TextField(
                     controller: _nameController,
                     decoration: InputDecoration(
                       hintText: 'e.g., Sarah, Leo, Alex',
-                      hintStyle: const TextStyle(color: AppColors.textTertiary, fontSize: 14),
-                      suffixIcon: const Icon(Icons.edit_outlined, size: 18, color: AppColors.textTertiary),
+                      hintStyle: const TextStyle(
+                        color: AppColors.textTertiary,
+                        fontSize: 14,
+                      ),
+                      suffixIcon: const Icon(
+                        Icons.edit_outlined,
+                        size: 18,
+                        color: AppColors.textTertiary,
+                      ),
                       filled: true,
                       fillColor: const Color(0xFFFAFAFA),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 12,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(AppRadius.md),
                         borderSide: const BorderSide(color: AppColors.border),
@@ -117,19 +150,26 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(AppRadius.md),
-                        borderSide: const BorderSide(color: Color(0xFF3B6E59), width: 1.5),
+                        borderSide: const BorderSide(
+                          color: Color(0xFF3B6E59),
+                          width: 1.5,
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(height: AppSpacing.md.h),
-                  const Text('Role & Nutritional Profile', style: AppTextStyles.inputLabel),
+                  const Text(
+                    'Role & Nutritional Profile',
+                    style: AppTextStyles.inputLabel,
+                  ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
                         child: _buildRoleCard(
                           title: 'Adult',
-                          desc: 'Full nutritional scale & adult metabolic benchmarks',
+                          desc:
+                              'Full nutritional scale & adult metabolic benchmarks',
                           isSelected: _isAdult,
                           onTap: () => setState(() => _isAdult = true),
                         ),
@@ -138,7 +178,8 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                       Expanded(
                         child: _buildRoleCard(
                           title: 'Child',
-                          desc: 'Under 12 yrs (gentle spice & child-friendly portions)',
+                          desc:
+                              'Under 12 yrs (gentle spice & child-friendly portions)',
                           isSelected: !_isAdult,
                           onTap: () => setState(() => _isAdult = false),
                         ),
@@ -158,17 +199,26 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.hourglass_empty, color: Color(0xFF2E634F), size: 20),
+                      Icon(
+                        Icons.hourglass_empty,
+                        color: Color(0xFF2E634F),
+                        size: 20,
+                      ),
                       SizedBox(width: 8),
                       Text('Portion Scaling', style: AppTextStyles.titleMedium),
                       Spacer(),
-                      Icon(Icons.info_outline, size: 18, color: AppColors.textTertiary),
+                      Icon(
+                        Icons.info_outline,
+                        size: 18,
+                        color: AppColors.textTertiary,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 6),
                   Text(
                     'Used to dynamically calculate recipe servings and smart grocery volume for collective meals.',
-                    style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.bodySmall
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                   SizedBox(height: AppSpacing.md.h),
                   GridView.count(
@@ -179,15 +229,34 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                     mainAxisSpacing: 10,
                     childAspectRatio: 1.5,
                     children: [
-                      _buildPortionTile('0.5x', 'Light', 'Ideal for toddlers, kids, or smaller appetites.'),
-                      _buildPortionTile('1.0x', 'Standard', 'Standard adult benchmark baseline.'),
-                      _buildPortionTile('1.25x', 'Hearty', 'For active lifestyles and endurance fitness.'),
-                      _buildPortionTile('1.5x', 'Athlete', 'High-caloric or heavy training meal plans.'),
+                      _buildPortionTile(
+                        '0.5x',
+                        'Light',
+                        'Ideal for toddlers, kids, or smaller appetites.',
+                      ),
+                      _buildPortionTile(
+                        '1.0x',
+                        'Standard',
+                        'Standard adult benchmark baseline.',
+                      ),
+                      _buildPortionTile(
+                        '1.25x',
+                        'Hearty',
+                        'For active lifestyles and endurance fitness.',
+                      ),
+                      _buildPortionTile(
+                        '1.5x',
+                        'Athlete',
+                        'High-caloric or heavy training meal plans.',
+                      ),
                     ],
                   ),
                   SizedBox(height: AppSpacing.sm.h),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF7F8F7),
                       borderRadius: BorderRadius.circular(AppRadius.md),
@@ -195,12 +264,17 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.restaurant, size: 16, color: Color(0xFF3B6E59)),
+                        const Icon(
+                          Icons.restaurant,
+                          size: 16,
+                          color: Color(0xFF3B6E59),
+                        ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             'A standard 4-person dinner yields exactly 1 serving for this member.',
-                            style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                            style: AppTextStyles.bodySmall
+                                .copyWith(color: AppColors.textSecondary),
                           ),
                         ),
                       ],
@@ -219,15 +293,23 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.eco_outlined, color: Color(0xFF2E634F), size: 20),
+                      Icon(
+                        Icons.eco_outlined,
+                        color: Color(0xFF2E634F),
+                        size: 20,
+                      ),
                       SizedBox(width: 8),
-                      Text('Food Preferences', style: AppTextStyles.titleMedium),
+                      Text(
+                        'Food Preferences',
+                        style: AppTextStyles.titleMedium,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 6),
                   Text(
                     'General culinary styles and taste guidelines (soft preferences, not health-critical).',
-                    style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.bodySmall
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                   SizedBox(height: AppSpacing.md.h),
                   Wrap(
@@ -249,7 +331,11 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             if (isSelected) ...[
-                              const Icon(Icons.check, size: 14, color: Color(0xFF1B4938)),
+                              const Icon(
+                                Icons.check,
+                                size: 14,
+                                color: Color(0xFF1B4938),
+                              ),
                               const SizedBox(width: 4),
                             ],
                             Text(pref),
@@ -270,14 +356,19 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(AppRadius.pill),
                           side: BorderSide(
-                            color: isSelected ? const Color(0xFF265B46) : AppColors.border,
+                            color: isSelected
+                                ? const Color(0xFF265B46)
+                                : AppColors.border,
                             width: isSelected ? 1.5 : 1,
                           ),
                         ),
                         labelStyle: TextStyle(
                           fontSize: 12,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                          color: isSelected ? const Color(0xFF1B4938) : AppColors.textPrimary,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.w500,
+                          color: isSelected
+                              ? const Color(0xFF1B4938)
+                              : AppColors.textPrimary,
                         ),
                       );
                     }).toList(),
@@ -303,7 +394,9 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                     height: 4,
                     decoration: const BoxDecoration(
                       color: Color(0xFF8E3730),
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.md)),
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(AppRadius.md),
+                      ),
                     ),
                   ),
                   Padding(
@@ -313,11 +406,22 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.shield_outlined, color: Color(0xFF8E3730), size: 20),
+                            const Icon(
+                              Icons.shield_outlined,
+                              color: Color(0xFF8E3730),
+                              size: 20,
+                            ),
                             const SizedBox(width: 8),
-                            const Text('Allergies & Restrictions', style: AppTextStyles.titleMedium),
+                            const Text(
+                              'Allergies & Restrictions',
+                              style: AppTextStyles.titleMedium,
+                            ),
                             const Spacer(),
-                            _buildPill('SAFETY CRITICAL', bg: const Color(0xFFFDECEB), fg: const Color(0xFF8E3730)),
+                            _buildPill(
+                              'SAFETY CRITICAL',
+                              bg: const Color(0xFFFDECEB),
+                              fg: const Color(0xFF8E3730),
+                            ),
                           ],
                         ),
                         SizedBox(height: AppSpacing.sm.h),
@@ -330,16 +434,27 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(Icons.shield_outlined, color: Color(0xFF8E3730), size: 16),
+                              const Icon(
+                                Icons.shield_outlined,
+                                color: Color(0xFF8E3730),
+                                size: 16,
+                              ),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: RichText(
                                   text: const TextSpan(
-                                    style: TextStyle(fontSize: 12, color: Color(0xFF333333), height: 1.4),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xFF333333),
+                                      height: 1.4,
+                                    ),
                                     children: [
                                       TextSpan(
                                         text: 'Zero-tolerance filter: ',
-                                        style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF8E3730)),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF8E3730),
+                                        ),
                                       ),
                                       TextSpan(
                                         text:
@@ -366,7 +481,8 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                             'Fish',
                             'Sesame',
                           ].map((allergen) {
-                            final isSelected = _selectedAllergens.contains(allergen);
+                            final isSelected =
+                                _selectedAllergens.contains(allergen);
                             return FilterChip(
                               label: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -374,7 +490,9 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                                   Icon(
                                     isSelected ? Icons.error : Icons.block,
                                     size: 14,
-                                    color: isSelected ? const Color(0xFF7A1C16) : AppColors.textSecondary,
+                                    color: isSelected
+                                        ? const Color(0xFF7A1C16)
+                                        : AppColors.textSecondary,
                                   ),
                                   const SizedBox(width: 4),
                                   Text(allergen),
@@ -393,16 +511,23 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                               backgroundColor: AppColors.white,
                               selectedColor: const Color(0xFFFBE4E2),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(AppRadius.pill),
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.pill),
                                 side: BorderSide(
-                                  color: isSelected ? const Color(0xFF7A1C16) : AppColors.border,
+                                  color: isSelected
+                                      ? const Color(0xFF7A1C16)
+                                      : AppColors.border,
                                   width: isSelected ? 1.5 : 1,
                                 ),
                               ),
                               labelStyle: TextStyle(
                                 fontSize: 12,
-                                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                                color: isSelected ? const Color(0xFF7A1C16) : AppColors.textPrimary,
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.w500,
+                                color: isSelected
+                                    ? const Color(0xFF7A1C16)
+                                    : AppColors.textPrimary,
                               ),
                             );
                           }).toList(),
@@ -410,10 +535,18 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                         const SizedBox(height: 12),
                         TextButton.icon(
                           onPressed: () {},
-                          icon: const Icon(Icons.add_circle_outline, color: Color(0xFF265B46), size: 18),
+                          icon: const Icon(
+                            Icons.add_circle_outline,
+                            color: Color(0xFF265B46),
+                            size: 18,
+                          ),
                           label: const Text(
                             'Add custom allergen',
-                            style: TextStyle(color: Color(0xFF265B46), fontWeight: FontWeight.bold, fontSize: 13),
+                            style: TextStyle(
+                              color: Color(0xFF265B46),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
                       ],
@@ -437,7 +570,11 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.auto_awesome, color: Color(0xFFB0623A), size: 20),
+                  const Icon(
+                    Icons.auto_awesome,
+                    color: Color(0xFFB0623A),
+                    size: 20,
+                  ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Column(
@@ -482,7 +619,11 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.person_outline, color: AppColors.white, size: 20),
+                    Icon(
+                      Icons.person_outline,
+                      color: AppColors.white,
+                      size: 20,
+                    ),
                     SizedBox(width: 8),
                     Text(
                       'Save Member',
@@ -500,7 +641,8 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
             Center(
               child: Text(
                 'Returns to Manage Household with updated portions & allergy matrix.',
-                style: AppTextStyles.labelSmall.copyWith(color: AppColors.textTertiary),
+                style: AppTextStyles.labelSmall
+                    .copyWith(color: AppColors.textTertiary),
               ),
             ),
 
@@ -533,7 +675,12 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
       ),
       child: Text(
         text,
-        style: TextStyle(color: fg, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+        style: TextStyle(
+          color: fg,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 0.5,
+        ),
       ),
     );
   }
@@ -563,18 +710,25 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title, style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+                Text(
+                  title,
+                  style: AppTextStyles.titleSmall
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
                 Icon(
                   isSelected ? Icons.check_circle : Icons.circle_outlined,
                   size: 18,
-                  color: isSelected ? const Color(0xFF2E634F) : AppColors.textTertiary,
+                  color: isSelected
+                      ? const Color(0xFF2E634F)
+                      : AppColors.textTertiary,
                 ),
               ],
             ),
             const SizedBox(height: 6),
             Text(
               desc,
-              style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary, height: 1.3),
+              style: AppTextStyles.labelSmall
+                  .copyWith(color: AppColors.textSecondary, height: 1.3),
             ),
           ],
         ),
@@ -604,11 +758,18 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(factor, style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold)),
+                Text(
+                  factor,
+                  style: AppTextStyles.titleMedium
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: isSelected ? const Color(0xFFD6EDE0) : const Color(0xFFEDEDED),
+                    color: isSelected
+                        ? const Color(0xFFD6EDE0)
+                        : const Color(0xFFEDEDED),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -616,7 +777,9 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      color: isSelected ? const Color(0xFF235843) : const Color(0xFF555555),
+                      color: isSelected
+                          ? const Color(0xFF235843)
+                          : const Color(0xFF555555),
                     ),
                   ),
                 ),
@@ -627,7 +790,8 @@ class _AddHouseholdMemberScreenState extends State<AddHouseholdMemberScreen> {
               desc,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary, fontSize: 10),
+              style: AppTextStyles.labelSmall
+                  .copyWith(color: AppColors.textSecondary, fontSize: 10),
             ),
           ],
         ),

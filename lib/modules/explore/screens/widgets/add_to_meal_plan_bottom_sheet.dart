@@ -15,25 +15,33 @@ class AddToMealPlanBottomSheet extends StatefulWidget {
   const AddToMealPlanBottomSheet({
     super.key,
     this.recipeName = 'Turkish Lentil Chicken Bowl',
-    this.recipeImage = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80',
+    this.recipeImage =
+        'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80',
     this.prepTime = '35 min',
   });
 
-  static Future<void> show(BuildContext context, {String? name, String? image, String? time}) {
+  static Future<void> show(
+    BuildContext context, {
+    String? name,
+    String? image,
+    String? time,
+  }) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => AddToMealPlanBottomSheet(
         recipeName: name ?? 'Turkish Lentil Chicken Bowl',
-        recipeImage: image ?? 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80',
+        recipeImage: image ??
+            'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80',
         prepTime: time ?? '35 min',
       ),
     );
   }
 
   @override
-  State<AddToMealPlanBottomSheet> createState() => _AddToMealPlanBottomSheetState();
+  State<AddToMealPlanBottomSheet> createState() =>
+      _AddToMealPlanBottomSheetState();
 }
 
 class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
@@ -85,7 +93,11 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.close, size: 20, color: AppColors.textPrimary),
+                  icon: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: AppColors.textPrimary,
+                  ),
                   onPressed: () => Get.back(),
                 ),
               ],
@@ -110,8 +122,10 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
                       width: 56,
                       height: 56,
                       fit: BoxFit.cover,
-                      placeholder: (_, __) => Container(color: AppColors.shimmerBase),
-                      errorWidget: (_, __, ___) => Container(color: AppColors.shimmerBase),
+                      placeholder: (_, __) =>
+                          Container(color: AppColors.shimmerBase),
+                      errorWidget: (_, __, ___) =>
+                          Container(color: AppColors.shimmerBase),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -130,11 +144,16 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            const Icon(Icons.access_time, size: 14, color: AppColors.textSecondary),
+                            const Icon(
+                              Icons.access_time,
+                              size: 14,
+                              color: AppColors.textSecondary,
+                            ),
                             const SizedBox(width: 4),
                             Text(
                               widget.prepTime,
-                              style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                              style: AppTextStyles.bodySmall
+                                  .copyWith(color: AppColors.textSecondary),
                             ),
                           ],
                         ),
@@ -174,8 +193,20 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
                           child: DropdownButton<String>(
                             isExpanded: true,
                             value: _selectedWhen,
-                            items: ['Today', 'Tomorrow', 'Wednesday', 'Thursday', 'Friday'].map((s) {
-                              return DropdownMenuItem(value: s, child: Text(s, style: const TextStyle(fontSize: 14)));
+                            items: [
+                              'Today',
+                              'Tomorrow',
+                              'Wednesday',
+                              'Thursday',
+                              'Friday',
+                            ].map((s) {
+                              return DropdownMenuItem(
+                                value: s,
+                                child: Text(
+                                  s,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              );
                             }).toList(),
                             onChanged: (v) {
                               if (v != null) setState(() => _selectedWhen = v);
@@ -211,8 +242,15 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
                           child: DropdownButton<String>(
                             isExpanded: true,
                             value: _selectedMeal,
-                            items: ['Breakfast', 'Lunch', 'Dinner', 'Snack'].map((s) {
-                              return DropdownMenuItem(value: s, child: Text(s, style: const TextStyle(fontSize: 14)));
+                            items: ['Breakfast', 'Lunch', 'Dinner', 'Snack']
+                                .map((s) {
+                              return DropdownMenuItem(
+                                value: s,
+                                child: Text(
+                                  s,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              );
                             }).toList(),
                             onChanged: (v) {
                               if (v != null) setState(() => _selectedMeal = v);
@@ -247,7 +285,11 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.remove, size: 18, color: AppColors.textPrimary),
+                    icon: const Icon(
+                      Icons.remove,
+                      size: 18,
+                      color: AppColors.textPrimary,
+                    ),
                     onPressed: () {
                       if (_servings > 1) setState(() => _servings--);
                     },
@@ -265,7 +307,11 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.add, size: 18, color: AppColors.textPrimary),
+                    icon: const Icon(
+                      Icons.add,
+                      size: 18,
+                      color: AppColors.textPrimary,
+                    ),
                     onPressed: () => setState(() => _servings++),
                   ),
                 ],
@@ -316,12 +362,20 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, size: 18, color: Color(0xFFEA580C)),
+                  const Icon(
+                    Icons.info_outline,
+                    size: 18,
+                    color: Color(0xFFEA580C),
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: RichText(
                       text: const TextSpan(
-                        style: TextStyle(fontSize: 12, color: Color(0xFF431407), height: 1.3),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF431407),
+                          height: 1.3,
+                        ),
                         children: [
                           TextSpan(text: 'This will replace: '),
                           TextSpan(
@@ -347,11 +401,16 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.shopping_bag_outlined, size: 18, color: AppColors.textSecondary),
+                  const Icon(
+                    Icons.shopping_bag_outlined,
+                    size: 18,
+                    color: AppColors.textSecondary,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Missing ingredients will be added to your shopping list.',
-                    style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                    style: AppTextStyles.bodySmall
+                        .copyWith(color: AppColors.textSecondary, fontSize: 12),
                   ),
                 ],
               ),
@@ -363,7 +422,10 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
             InkWell(
               onTap: () {
                 Get.back();
-                Get.snackbar('Added', '${widget.recipeName} added to $_selectedWhen\'s $_selectedMeal!');
+                Get.snackbar(
+                  'Added',
+                  '${widget.recipeName} added to $_selectedWhen\'s $_selectedMeal!',
+                );
               },
               borderRadius: BorderRadius.circular(AppRadius.md),
               child: Container(
@@ -376,7 +438,11 @@ class _AddToMealPlanBottomSheetState extends State<AddToMealPlanBottomSheet> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.calendar_today_outlined, size: 18, color: AppColors.white),
+                    Icon(
+                      Icons.calendar_today_outlined,
+                      size: 18,
+                      color: AppColors.white,
+                    ),
                     SizedBox(width: 8),
                     Text(
                       'Add to Plan',

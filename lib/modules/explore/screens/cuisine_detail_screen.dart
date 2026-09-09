@@ -86,12 +86,10 @@ class _CuisineDetailScreenState extends State<CuisineDetailScreen> {
 
   List<Map<String, dynamic>> get _recipes {
     final String name = Get.arguments?['cuisine'] as String? ?? 'Turkish';
-    return _cuisineRecipes[name] ??
-        _cuisineRecipes['Turkish']!;
+    return _cuisineRecipes[name] ?? _cuisineRecipes['Turkish']!;
   }
 
-  String get _cuisineName =>
-      Get.arguments?['cuisine'] as String? ?? 'Turkish';
+  String get _cuisineName => Get.arguments?['cuisine'] as String? ?? 'Turkish';
 
   String get _heroImage =>
       _cuisineImages[_cuisineName] ??
@@ -208,8 +206,7 @@ class _CuisineDetailScreenState extends State<CuisineDetailScreen> {
                         return Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: GestureDetector(
-                            onTap: () =>
-                                setState(() => _selectedFilter = f),
+                            onTap: () => setState(() => _selectedFilter = f),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 16,

@@ -61,6 +61,12 @@ class ShoppingController extends GetxController {
 
   final RxList<String> collectedItems = <String>[].obs;
 
+  void collectItem(String name) {
+    if (!collectedItems.contains(name)) {
+      collectedItems.add(name);
+    }
+  }
+
   void switchTab(int index) => selectedTab.value = index;
 
   void toggleItem(int catIndex, int itemIndex) {

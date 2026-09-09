@@ -14,7 +14,8 @@ class CuisineGroup extends StatelessWidget {
   final Map<String, String> cuisineImages;
   final OnboardingController controller;
 
-  const CuisineGroup({super.key,
+  const CuisineGroup({
+    super.key,
     required this.groupName,
     required this.cuisines,
     required this.cuisineImages,
@@ -32,12 +33,12 @@ class CuisineGroup extends StatelessWidget {
           children: [
             Text(groupName, style: AppTextStyles.headlineSmall),
             Obx(
-                  () {
+              () {
                 final List<String> names = cuisines
                     .map((Map<String, dynamic> c) => c['name'] as String)
                     .toList();
                 final bool allSelected =
-                names.every(controller.selectedCuisines.contains);
+                    names.every(controller.selectedCuisines.contains);
                 return GestureDetector(
                   onTap: () => controller.toggleAllGroup(cuisines),
                   child: Text(
@@ -70,7 +71,7 @@ class CuisineGroup extends StatelessWidget {
           itemBuilder: (_, int i) {
             final String name = cuisines[i]['name'] as String;
             return Obx(
-                  () => CuisineCard(
+              () => CuisineCard(
                 name: name,
                 imageUrl: cuisineImages[name] ?? '',
                 isSelected: controller.selectedCuisines.contains(name),

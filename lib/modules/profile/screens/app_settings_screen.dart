@@ -44,7 +44,10 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -135,14 +138,18 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
-                          color: _isMetric ? const Color(0xFF3B6E59) : Colors.transparent,
+                          color: _isMetric
+                              ? const Color(0xFF3B6E59)
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(AppRadius.md - 2),
                         ),
                         child: Center(
                           child: Text(
                             'Metric',
                             style: TextStyle(
-                              color: _isMetric ? AppColors.white : AppColors.textPrimary,
+                              color: _isMetric
+                                  ? AppColors.white
+                                  : AppColors.textPrimary,
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
@@ -157,14 +164,18 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
-                          color: !_isMetric ? const Color(0xFF3B6E59) : Colors.transparent,
+                          color: !_isMetric
+                              ? const Color(0xFF3B6E59)
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(AppRadius.md - 2),
                         ),
                         child: Center(
                           child: Text(
                             'Imperial',
                             style: TextStyle(
-                              color: !_isMetric ? AppColors.white : AppColors.textPrimary,
+                              color: !_isMetric
+                                  ? AppColors.white
+                                  : AppColors.textPrimary,
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
@@ -221,10 +232,18 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   ListTile(
-                    title: const Text('Export Data', style: AppTextStyles.titleSmall),
-                    trailing: const Icon(Icons.download_outlined, color: AppColors.textSecondary, size: 20),
+                    title: const Text(
+                      'Export Data',
+                      style: AppTextStyles.titleSmall,
+                    ),
+                    trailing: const Icon(
+                      Icons.download_outlined,
+                      color: AppColors.textSecondary,
+                      size: 20,
+                    ),
                     onTap: () {},
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   _buildSimpleNavRow(
@@ -241,7 +260,11 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
             Center(
               child: TextButton.icon(
                 onPressed: () {},
-                icon: const Icon(Icons.logout, color: Color(0xFFB9382F), size: 20),
+                icon: const Icon(
+                  Icons.logout,
+                  color: Color(0xFFB9382F),
+                  size: 20,
+                ),
                 label: const Text(
                   'Log Out',
                   style: TextStyle(
@@ -257,7 +280,8 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
             Center(
               child: Text(
                 'Deleting your account is permanent and cannot be undone.',
-                style: AppTextStyles.labelSmall.copyWith(color: AppColors.textTertiary),
+                style: AppTextStyles.labelSmall
+                    .copyWith(color: AppColors.textTertiary),
               ),
             ),
 
@@ -290,10 +314,17 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
     );
   }
 
-  Widget _buildScheduleRow({required IconData icon, required String label, required String time}) {
+  Widget _buildScheduleRow({
+    required IconData icon,
+    required String label,
+    required String time,
+  }) {
     return ListTile(
       leading: Icon(icon, color: AppColors.textSecondary, size: 20),
-      title: Text(label, style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+      title: Text(
+        label,
+        style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold),
+      ),
       trailing: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
@@ -319,7 +350,10 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
     required ValueChanged<bool> onChanged,
   }) {
     return SwitchListTile.adaptive(
-      title: Text(label, style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+      title: Text(
+        label,
+        style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold),
+      ),
       value: value,
       activeTrackColor: const Color(0xFF3B6E59),
       onChanged: onChanged,
@@ -335,13 +369,24 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
   }) {
     return ListTile(
       leading: Icon(icon, color: AppColors.textSecondary, size: 20),
-      title: Text(label, style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
+      title: Text(
+        label,
+        style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold),
+      ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(value, style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary)),
+          Text(
+            value,
+            style: AppTextStyles.bodySmall
+                .copyWith(color: AppColors.textSecondary),
+          ),
           const SizedBox(width: 4),
-          const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+          const Icon(
+            Icons.chevron_right,
+            size: 18,
+            color: AppColors.textTertiary,
+          ),
         ],
       ),
       onTap: onTap,
@@ -349,10 +394,20 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
     );
   }
 
-  Widget _buildSimpleNavRow({required String label, required VoidCallback onTap}) {
+  Widget _buildSimpleNavRow({
+    required String label,
+    required VoidCallback onTap,
+  }) {
     return ListTile(
-      title: Text(label, style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold)),
-      trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+      title: Text(
+        label,
+        style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold),
+      ),
+      trailing: const Icon(
+        Icons.chevron_right,
+        size: 18,
+        color: AppColors.textTertiary,
+      ),
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
     );

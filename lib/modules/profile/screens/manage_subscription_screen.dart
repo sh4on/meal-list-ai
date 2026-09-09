@@ -30,13 +30,19 @@ class ManageSubscriptionScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings_outlined, color: AppColors.textPrimary),
+            icon: const Icon(
+              Icons.settings_outlined,
+              color: AppColors.textPrimary,
+            ),
             onPressed: () {},
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -60,7 +66,11 @@ class ManageSubscriptionScreen extends StatelessWidget {
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.check_circle_outline, size: 16, color: Color(0xFF265B46)),
+                  Icon(
+                    Icons.check_circle_outline,
+                    size: 16,
+                    color: Color(0xFF265B46),
+                  ),
                   SizedBox(width: 6),
                   Text(
                     'Current Plan: Free',
@@ -81,7 +91,8 @@ class ManageSubscriptionScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Your Monthly Usage',
-                style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold),
+                style: AppTextStyles.titleMedium
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: AppSpacing.xs.h),
@@ -98,10 +109,17 @@ class ManageSubscriptionScreen extends StatelessWidget {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('AI Plan Generations', style: AppTextStyles.bodyMedium),
+                      Text(
+                        'AI Plan Generations',
+                        style: AppTextStyles.bodyMedium,
+                      ),
                       Text(
                         '2 of 3 used',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textPrimary),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: AppColors.textPrimary,
+                        ),
                       ),
                     ],
                   ),
@@ -112,7 +130,8 @@ class ManageSubscriptionScreen extends StatelessWidget {
                       value: 2 / 3,
                       minHeight: 8,
                       backgroundColor: Color(0xFFEEEEEE),
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3B6E59)),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Color(0xFF3B6E59)),
                     ),
                   ),
                   SizedBox(height: AppSpacing.md.h),
@@ -122,7 +141,11 @@ class ManageSubscriptionScreen extends StatelessWidget {
                       Text('Recipe Imports', style: AppTextStyles.bodyMedium),
                       Text(
                         '4 of 5 used',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textPrimary),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: AppColors.textPrimary,
+                        ),
                       ),
                     ],
                   ),
@@ -133,7 +156,8 @@ class ManageSubscriptionScreen extends StatelessWidget {
                       value: 4 / 5,
                       minHeight: 8,
                       backgroundColor: Color(0xFFEEEEEE),
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF3B6E59)),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Color(0xFF3B6E59)),
                     ),
                   ),
                 ],
@@ -147,7 +171,8 @@ class ManageSubscriptionScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Available Plans',
-                style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold),
+                style: AppTextStyles.titleMedium
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: AppSpacing.xs.h),
@@ -167,7 +192,10 @@ class ManageSubscriptionScreen extends StatelessWidget {
                     top: 0,
                     right: 0,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFEDEDED),
                         borderRadius: BorderRadius.circular(4),
@@ -185,7 +213,13 @@ class ManageSubscriptionScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Free', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text(
+                        'Free',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const SizedBox(height: 2),
                       RichText(
                         text: const TextSpan(
@@ -200,7 +234,10 @@ class ManageSubscriptionScreen extends StatelessWidget {
                             ),
                             TextSpan(
                               text: '/mo',
-                              style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: AppColors.textSecondary,
+                              ),
                             ),
                           ],
                         ),
@@ -229,7 +266,10 @@ class ManageSubscriptionScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Plus Monthly', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text(
+                    'Plus Monthly',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 2),
                   RichText(
                     text: const TextSpan(
@@ -244,17 +284,32 @@ class ManageSubscriptionScreen extends StatelessWidget {
                         ),
                         TextSpan(
                           text: '/mo',
-                          style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: AppColors.textSecondary,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 12),
-                  _buildFeatureRow(Icons.check_circle_outline, 'Unlimited planning', iconColor: const Color(0xFF265B46)),
+                  _buildFeatureRow(
+                    Icons.check_circle_outline,
+                    'Unlimited planning',
+                    iconColor: const Color(0xFF265B46),
+                  ),
                   const SizedBox(height: 8),
-                  _buildFeatureRow(Icons.check_circle_outline, 'Unlimited recipe imports', iconColor: const Color(0xFF265B46)),
+                  _buildFeatureRow(
+                    Icons.check_circle_outline,
+                    'Unlimited recipe imports',
+                    iconColor: const Color(0xFF265B46),
+                  ),
                   const SizedBox(height: 8),
-                  _buildFeatureRow(Icons.auto_awesome, 'Advanced AI insights', iconColor: const Color(0xFFE28B38)),
+                  _buildFeatureRow(
+                    Icons.auto_awesome,
+                    'Advanced AI insights',
+                    iconColor: const Color(0xFFE28B38),
+                  ),
                   const SizedBox(height: 16),
                   InkWell(
                     onTap: () {},
@@ -299,7 +354,10 @@ class ManageSubscriptionScreen extends StatelessWidget {
                     top: 0,
                     right: 0,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFEE9748),
                         borderRadius: BorderRadius.circular(4),
@@ -317,7 +375,13 @@ class ManageSubscriptionScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Plus Yearly', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text(
+                        'Plus Yearly',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const SizedBox(height: 2),
                       RichText(
                         text: const TextSpan(
@@ -332,7 +396,10 @@ class ManageSubscriptionScreen extends StatelessWidget {
                             ),
                             TextSpan(
                               text: '/yr',
-                              style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: AppColors.textSecondary,
+                              ),
                             ),
                           ],
                         ),
@@ -340,12 +407,24 @@ class ManageSubscriptionScreen extends StatelessWidget {
                       const SizedBox(height: 2),
                       const Text(
                         'Saves ~\$40 compared to monthly',
-                        style: TextStyle(fontSize: 12, color: Color(0xFFEE9748), fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFFEE9748),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       const SizedBox(height: 12),
-                      _buildFeatureRow(Icons.check_circle_outline, 'Everything in Monthly', iconColor: const Color(0xFF265B46)),
+                      _buildFeatureRow(
+                        Icons.check_circle_outline,
+                        'Everything in Monthly',
+                        iconColor: const Color(0xFF265B46),
+                      ),
                       const SizedBox(height: 8),
-                      _buildFeatureRow(Icons.science_outlined, 'Early access to new features', iconColor: const Color(0xFFEE9748)),
+                      _buildFeatureRow(
+                        Icons.science_outlined,
+                        'Early access to new features',
+                        iconColor: const Color(0xFFEE9748),
+                      ),
                       const SizedBox(height: 16),
                       InkWell(
                         onTap: () {},
@@ -398,7 +477,8 @@ class ManageSubscriptionScreen extends StatelessWidget {
               child: Text(
                 'Subscriptions and cancellations are managed through your App Store account settings.',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.labelSmall
+                    .copyWith(color: AppColors.textSecondary),
               ),
             ),
 
@@ -409,12 +489,19 @@ class ManageSubscriptionScreen extends StatelessWidget {
               onPressed: () {},
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: AppColors.border),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.md),
+                ),
               ),
               child: const Text(
                 'Manage App Store Subscription',
-                style: TextStyle(color: Color(0xFF265B46), fontWeight: FontWeight.bold, fontSize: 13),
+                style: TextStyle(
+                  color: Color(0xFF265B46),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
               ),
             ),
 
@@ -435,7 +522,11 @@ class ManageSubscriptionScreen extends StatelessWidget {
     );
   }
 
-  static Widget _buildFeatureRow(IconData icon, String text, {Color? iconColor}) {
+  static Widget _buildFeatureRow(
+    IconData icon,
+    String text, {
+    Color? iconColor,
+  }) {
     return Row(
       children: [
         Icon(icon, size: 16, color: iconColor ?? AppColors.textSecondary),

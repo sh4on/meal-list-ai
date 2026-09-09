@@ -8,6 +8,7 @@ class GoalGrid extends StatelessWidget {
   final void Function(String) onSelect;
 
   const GoalGrid({
+    super.key,
     required this.goals,
     required this.selectedGoal,
     required this.onSelect,

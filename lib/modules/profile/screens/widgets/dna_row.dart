@@ -9,7 +9,7 @@ class DnaRow extends StatelessWidget {
   final String? value;
   final Widget? customWidget;
 
-  const DnaRow({required this.label, this.value, this.customWidget});
+  const DnaRow({super.key, required this.label, this.value, this.customWidget});
 
   @override
   Widget build(BuildContext context) {

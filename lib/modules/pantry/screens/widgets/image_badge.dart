@@ -11,6 +11,7 @@ class ImageBadge extends StatelessWidget {
   final bool isWarning;
 
   const ImageBadge({
+    super.key,
     required this.label,
     required this.isDark,
     this.isWarning = false,

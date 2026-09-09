@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +10,6 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../routes/app_routes.dart';
 
 // what can i cook screen
 // suggests recipes based on available pantry ingredients with household safety filters
@@ -298,7 +296,8 @@ class _WhatCanICookScreenState extends State<WhatCanICookScreen> {
                                 text: 'All suggestions are ',
                               ),
                               TextSpan(
-                                text: '100% free of Gluten, Shellfish, and Peanuts',
+                                text:
+                                    '100% free of Gluten, Shellfish, and Peanuts',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.textPrimary,
@@ -409,15 +408,3 @@ class _WhatCanICookScreenState extends State<WhatCanICookScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

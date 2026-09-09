@@ -50,8 +50,10 @@ class ForgotPasswordScreen extends GetView<AuthController> {
                 SizedBox(height: AppSpacing.xxl.h),
                 SvgPicture.asset(Assets.images.retry),
                 SizedBox(height: AppSpacing.sm.h),
-                const Text('Reset your password',
-                    style: AppTextStyles.displayMedium),
+                const Text(
+                  'Reset your password',
+                  style: AppTextStyles.displayMedium,
+                ),
                 SizedBox(height: AppSpacing.xs.h),
                 Text(
                   "Enter the email address associated with your account and we'll send you a link to reset yourpassword.",
@@ -82,13 +84,14 @@ class ForgotPasswordScreen extends GetView<AuthController> {
                 ),
                 SizedBox(height: AppSpacing.xl.h),
                 TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text(
-                      'Return to Sign In',
-                      style: TextStyle(
-                        color: AppColors.primary,
-                      ),
-                    ))
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'Return to Sign In',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

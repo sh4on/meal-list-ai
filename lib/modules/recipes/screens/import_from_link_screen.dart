@@ -24,8 +24,10 @@ class ImportFromLinkScreen extends GetView<RecipeCreatorController> {
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: Get.back,
         ),
-        title: const Text('Import from a link',
-            style: AppTextStyles.headlineSmall,),
+        title: const Text(
+          'Import from a link',
+          style: AppTextStyles.headlineSmall,
+        ),
         centerTitle: true,
       ),
       body: Padding(

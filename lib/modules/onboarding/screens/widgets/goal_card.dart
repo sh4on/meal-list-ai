@@ -14,6 +14,7 @@ class GoalCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const GoalCard({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.icon,

@@ -11,7 +11,8 @@ class OnboardingBottomBar extends StatelessWidget {
   final int totalSteps;
   final VoidCallback onContinue;
 
-  const OnboardingBottomBar({super.key,
+  const OnboardingBottomBar({
+    super.key,
     required this.currentStep,
     required this.totalSteps,
     required this.onContinue,

@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/constants/app_colors.dart';
-import '../../../../core/constants/app_radius.dart';
-import '../../../../core/constants/app_spacing.dart';
-import '../../../../core/constants/app_text_styles.dart';
 
 // circle icon button for quantity stepper
 class CircleButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const CircleButton({required this.icon, required this.onTap});
+  const CircleButton({super.key, required this.icon, required this.onTap});
 
   @override
   Widget build(final BuildContext context) {

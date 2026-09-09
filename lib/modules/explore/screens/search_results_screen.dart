@@ -230,8 +230,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
 
             // recipe list
             ..._results.map(
-              (Map<String, dynamic> recipe) =>
-                  SearchResultCard(recipe: recipe),
+              (Map<String, dynamic> recipe) => SearchResultCard(recipe: recipe),
             ),
 
             SizedBox(height: AppSpacing.md.h),

@@ -8,7 +8,8 @@ class SectionHeader extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
 
-  const SectionHeader({super.key,
+  const SectionHeader({
+    super.key,
     required this.label,
     required this.icon,
     required this.iconColor,

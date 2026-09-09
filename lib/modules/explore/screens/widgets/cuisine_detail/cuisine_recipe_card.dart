@@ -102,13 +102,10 @@ class _CuisineRecipeCardState extends State<CuisineRecipeCard> {
                         GestureDetector(
                           onTap: () => setState(() => _isLiked = !_isLiked),
                           child: Icon(
-                            _isLiked
-                                ? Icons.favorite
-                                : Icons.favorite_border,
+                            _isLiked ? Icons.favorite : Icons.favorite_border,
                             size: 14,
-                            color: _isLiked
-                                ? Colors.red
-                                : AppColors.textSecondary,
+                            color:
+                                _isLiked ? Colors.red : AppColors.textSecondary,
                           ),
                         ),
                         const SizedBox(width: 5),
@@ -226,4 +223,3 @@ class _CuisineRecipeCardState extends State<CuisineRecipeCard> {
     );
   }
 }
-

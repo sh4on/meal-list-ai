@@ -181,8 +181,7 @@ class PantryController extends GetxController {
 
   // remove an item by name and stored location
   void removeItem(final Map<String, dynamic> item) {
-    final String storedIn =
-        ((item['storedIn'] as String?) ?? '').toLowerCase();
+    final String storedIn = ((item['storedIn'] as String?) ?? '').toLowerCase();
     switch (storedIn) {
       case 'fridge':
         fridgeItems.removeWhere((final i) => i['name'] == item['name']);
@@ -198,8 +197,10 @@ class PantryController extends GetxController {
   }
 
   // update an existing item
-  void updateItem(final Map<String, dynamic> original,
-      final Map<String, dynamic> updated) {
+  void updateItem(
+    final Map<String, dynamic> original,
+    final Map<String, dynamic> updated,
+  ) {
     final String storedIn =
         ((original['storedIn'] as String?) ?? '').toLowerCase();
     void update(final RxList<Map<String, dynamic>> list) {

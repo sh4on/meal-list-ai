@@ -211,8 +211,9 @@ class OnboardingController extends GetxController {
   }
 
   void toggleAllGroup(List<Map<String, dynamic>> groupCuisines) {
-    final List<String> names =
-        groupCuisines.map((Map<String, dynamic> c) => c['name'] as String).toList();
+    final List<String> names = groupCuisines
+        .map((Map<String, dynamic> c) => c['name'] as String)
+        .toList();
     final bool allSelected =
         names.every((String n) => selectedCuisines.contains(n));
     if (allSelected) {
@@ -268,16 +269,13 @@ class OnboardingController extends GetxController {
 
   // ─── navigation — corrected figma order ──────────────────────────────────
   // step 1 → 2
-  void goToDietaryPreferences() =>
-      Get.toNamed(AppRoutes.dietaryPreferences);
+  void goToDietaryPreferences() => Get.toNamed(AppRoutes.dietaryPreferences);
   // step 2 → 3
-  void goToFavouriteCuisines() =>
-      Get.toNamed(AppRoutes.favouriteCuisines);
+  void goToFavouriteCuisines() => Get.toNamed(AppRoutes.favouriteCuisines);
   // step 3 → 4
   void goToAllergies() => Get.toNamed(AppRoutes.allergies);
   // step 4 → 5
-  void goToCookingHousehold() =>
-      Get.toNamed(AppRoutes.cookingHousehold);
+  void goToCookingHousehold() => Get.toNamed(AppRoutes.cookingHousehold);
   // step 5: finish
   void finishOnboarding() => Get.offAllNamed(AppRoutes.main);
 }

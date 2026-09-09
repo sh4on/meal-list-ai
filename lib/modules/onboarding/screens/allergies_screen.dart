@@ -11,9 +11,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../shared/common_widgets/primary_button_widget.dart';
 import '../controllers/onboarding_controller.dart';
-import 'widgets/onboarding_progress_widget.dart';
 
 // Anything we should avoid? — step 4 of onboarding
 // "I have no restrictions" toggle, allergies search + chips,
@@ -232,17 +230,15 @@ class AllergiesScreen extends GetView<OnboardingController> {
                         spacing: 8,
                         runSpacing: 8,
                         children: filtered.map((String r) {
-                          final bool isSelected =
-                              controller.selectedDietaryRestrictions
-                                  .contains(r);
+                          final bool isSelected = controller
+                              .selectedDietaryRestrictions
+                              .contains(r);
                           return AllergyChip(
                             label: r,
                             isSelected: isSelected,
-                            onTap: () =>
-                                controller.toggleDietaryRestriction(r),
+                            onTap: () => controller.toggleDietaryRestriction(r),
                             onRemove: isSelected
-                                ? () =>
-                                    controller.toggleDietaryRestriction(r)
+                                ? () => controller.toggleDietaryRestriction(r)
                                 : null,
                           );
                         }).toList(),

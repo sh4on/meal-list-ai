@@ -7,7 +7,7 @@ import '../../../../core/constants/app_text_styles.dart';
 
 class MemberCard extends StatelessWidget {
   final Map<String, dynamic> member;
-  const MemberCard({required this.member});
+  const MemberCard({super.key, required this.member});
 
   @override
   Widget build(final BuildContext context) {

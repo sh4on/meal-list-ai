@@ -48,7 +48,10 @@ class ResetPasswordScreen extends GetView<AuthController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: AppSpacing.xxl.h),
-                const Text('Create new password', style: AppTextStyles.displayMedium),
+                const Text(
+                  'Create new password',
+                  style: AppTextStyles.displayMedium,
+                ),
                 SizedBox(height: AppSpacing.xs.h),
                 Text(
                   'Your new password must be different from previous passwords.',

@@ -72,14 +72,18 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Text(
                 'Choose what matters most to you.',
-                style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.bodyMedium
+                    .copyWith(color: AppColors.textSecondary),
               ),
             ),
             SizedBox(height: AppSpacing.xl.h),
@@ -97,7 +101,8 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
                 ),
                 const Spacer(),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: const Color(0xFF2E634F),
                     borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -139,7 +144,9 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(AppRadius.md),
                       border: Border.all(
-                        color: isSelected ? const Color(0xFF2E634F) : AppColors.border,
+                        color: isSelected
+                            ? const Color(0xFF2E634F)
+                            : AppColors.border,
                         width: isSelected ? 1.8 : 1,
                       ),
                     ),
@@ -161,7 +168,9 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
                             children: [
                               Icon(
                                 item['icon'] as IconData,
-                                color: isSelected ? const Color(0xFF2E634F) : AppColors.textPrimary,
+                                color: isSelected
+                                    ? const Color(0xFF2E634F)
+                                    : AppColors.textPrimary,
                                 size: 26,
                               ),
                               const SizedBox(height: 8),
@@ -171,7 +180,9 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.bold,
-                                  color: isSelected ? const Color(0xFF2E634F) : AppColors.textPrimary,
+                                  color: isSelected
+                                      ? const Color(0xFF2E634F)
+                                      : AppColors.textPrimary,
                                 ),
                               ),
                             ],
@@ -213,12 +224,17 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
                   },
                   borderRadius: BorderRadius.circular(AppRadius.md),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(AppRadius.md),
                       border: Border.all(
-                        color: isChecked ? const Color(0xFF2E634F) : AppColors.border,
+                        color: isChecked
+                            ? const Color(0xFF2E634F)
+                            : AppColors.border,
                         width: isChecked ? 1.5 : 1,
                       ),
                     ),
@@ -241,9 +257,13 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
                         ),
                         const SizedBox(width: 8),
                         Icon(
-                          isChecked ? Icons.check_box_outlined : Icons.check_box_outline_blank,
+                          isChecked
+                              ? Icons.check_box_outlined
+                              : Icons.check_box_outline_blank,
                           size: 20,
-                          color: isChecked ? const Color(0xFF2E634F) : AppColors.textTertiary,
+                          color: isChecked
+                              ? const Color(0xFF2E634F)
+                              : AppColors.textTertiary,
                         ),
                       ],
                     ),
@@ -266,7 +286,11 @@ class _MyGoalsScreenState extends State<MyGoalsScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.auto_awesome, color: Color(0xFFD48B47), size: 22),
+                  const Icon(
+                    Icons.auto_awesome,
+                    color: Color(0xFFD48B47),
+                    size: 22,
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(

@@ -10,7 +10,8 @@ class CookingTimeCard extends StatelessWidget {
   final VoidCallback onTap;
   final bool fullWidth;
 
-  const CookingTimeCard({super.key,
+  const CookingTimeCard({
+    super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,
@@ -47,14 +48,18 @@ class CookingTimeCard extends StatelessWidget {
                   Icon(
                     Icons.timer_outlined,
                     size: 20,
-                    color: isSelected ? AppColors.primary : AppColors.textTertiary,
+                    color:
+                        isSelected ? AppColors.primary : AppColors.textTertiary,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     label,
                     style: AppTextStyles.labelMedium.copyWith(
-                      color: isSelected ? AppColors.primary : AppColors.textSecondary,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                      color: isSelected
+                          ? AppColors.primary
+                          : AppColors.textSecondary,
+                      fontWeight:
+                          isSelected ? FontWeight.w600 : FontWeight.w400,
                     ),
                   ),
                 ],

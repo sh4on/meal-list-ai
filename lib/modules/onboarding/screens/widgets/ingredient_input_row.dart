@@ -10,7 +10,8 @@ class IngredientInputRow extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final VoidCallback onAdd;
 
-  const IngredientInputRow({super.key,
+  const IngredientInputRow({
+    super.key,
     required this.value,
     required this.onChanged,
     required this.onAdd,
@@ -61,8 +62,7 @@ class _IngredientInputRowState extends State<IngredientInputRow> {
                 hintStyle: AppTextStyles.bodyMedium
                     .copyWith(color: AppColors.textTertiary),
                 border: InputBorder.none,
-                contentPadding:
-                const EdgeInsets.symmetric(vertical: 12),
+                contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
             ),
           ),

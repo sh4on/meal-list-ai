@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -10,7 +9,8 @@ class SummaryBox extends StatelessWidget {
   final String count;
   final Color? color;
 
-  const SummaryBox({super.key,
+  const SummaryBox({
+    super.key,
     required this.label,
     required this.count,
     this.color,

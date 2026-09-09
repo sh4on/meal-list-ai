@@ -11,7 +11,8 @@ class AllergyChip extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback? onRemove;
 
-  const AllergyChip({super.key,
+  const AllergyChip({
+    super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,

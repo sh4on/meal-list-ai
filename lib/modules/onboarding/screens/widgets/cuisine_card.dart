@@ -12,7 +12,8 @@ class CuisineCard extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const CuisineCard({super.key,
+  const CuisineCard({
+    super.key,
     required this.name,
     required this.imageUrl,
     required this.isSelected,
@@ -51,8 +52,8 @@ class CuisineCard extends StatelessWidget {
                     size: 32,
                   ),
                 ),
-                loadingBuilder: (_, Widget child,
-                    ImageChunkEvent? loadingProgress) {
+                loadingBuilder:
+                    (_, Widget child, ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Container(color: AppColors.shimmerBase);
                 },

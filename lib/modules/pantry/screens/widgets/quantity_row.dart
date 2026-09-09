@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_radius.dart';
@@ -17,6 +16,7 @@ class QuantityRow extends StatelessWidget {
   final VoidCallback onIncrement;
 
   const QuantityRow({
+    super.key,
     required this.controller,
     required this.unit,
     required this.onDecrement,

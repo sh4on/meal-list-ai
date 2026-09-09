@@ -30,7 +30,10 @@ class AccountSettingsScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,14 +42,24 @@ class AccountSettingsScreen extends StatelessWidget {
             SizedBox(height: AppSpacing.xs.h),
             _buildCardWrapper(
               child: ListTile(
-                leading: const Icon(Icons.lock_outline, color: Color(0xFF2E634F), size: 22),
+                leading: const Icon(
+                  Icons.lock_outline,
+                  color: Color(0xFF2E634F),
+                  size: 22,
+                ),
                 title: Text(
                   'Change password',
-                  style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                  style: AppTextStyles.titleSmall
+                      .copyWith(fontWeight: FontWeight.w500),
                 ),
-                trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+                trailing: const Icon(
+                  Icons.chevron_right,
+                  size: 18,
+                  color: AppColors.textTertiary,
+                ),
                 onTap: () {},
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               ),
             ),
 
@@ -59,35 +72,56 @@ class AccountSettingsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.notifications_none, color: Color(0xFF2E634F), size: 22),
+                    leading: const Icon(
+                      Icons.notifications_none,
+                      color: Color(0xFF2E634F),
+                      size: 22,
+                    ),
                     title: Text(
                       'Notifications',
-                      style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+                    trailing: const Icon(
+                      Icons.chevron_right,
+                      size: 18,
+                      color: AppColors.textTertiary,
+                    ),
                     onTap: () {},
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   ListTile(
-                    leading: const Icon(Icons.language, color: Color(0xFF2E634F), size: 22),
+                    leading: const Icon(
+                      Icons.language,
+                      color: Color(0xFF2E634F),
+                      size: 22,
+                    ),
                     title: Text(
                       'Language & Region',
-                      style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           'English (US)',
-                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                          style: AppTextStyles.bodySmall
+                              .copyWith(color: AppColors.textSecondary),
                         ),
                         const SizedBox(width: 4),
-                        const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+                        const Icon(
+                          Icons.chevron_right,
+                          size: 18,
+                          color: AppColors.textTertiary,
+                        ),
                       ],
                     ),
                     onTap: () {},
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   ),
                 ],
               ),
@@ -102,36 +136,66 @@ class AccountSettingsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.description_outlined, color: Color(0xFF2E634F), size: 22),
+                    leading: const Icon(
+                      Icons.description_outlined,
+                      color: Color(0xFF2E634F),
+                      size: 22,
+                    ),
                     title: Text(
                       'Terms of services',
-                      style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+                    trailing: const Icon(
+                      Icons.chevron_right,
+                      size: 18,
+                      color: AppColors.textTertiary,
+                    ),
                     onTap: () {},
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   ListTile(
-                    leading: const Icon(Icons.shield_outlined, color: Color(0xFF2E634F), size: 22),
+                    leading: const Icon(
+                      Icons.shield_outlined,
+                      color: Color(0xFF2E634F),
+                      size: 22,
+                    ),
                     title: Text(
                       'Privacy Policy',
-                      style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+                    trailing: const Icon(
+                      Icons.chevron_right,
+                      size: 18,
+                      color: AppColors.textTertiary,
+                    ),
                     onTap: () {},
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   ),
                   const Divider(height: 1, color: AppColors.divider),
                   ListTile(
-                    leading: const Icon(Icons.info_outline, color: Color(0xFF2E634F), size: 22),
+                    leading: const Icon(
+                      Icons.info_outline,
+                      color: Color(0xFF2E634F),
+                      size: 22,
+                    ),
                     title: Text(
                       'About us',
-                      style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.w500),
+                      style: AppTextStyles.titleSmall
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
-                    trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+                    trailing: const Icon(
+                      Icons.chevron_right,
+                      size: 18,
+                      color: AppColors.textTertiary,
+                    ),
                     onTap: () {},
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   ),
                 ],
               ),
@@ -154,7 +218,11 @@ class AccountSettingsScreen extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.delete_outline, color: Color(0xFFB9382F), size: 20),
+                    Icon(
+                      Icons.delete_outline,
+                      color: Color(0xFFB9382F),
+                      size: 20,
+                    ),
                     SizedBox(width: 8),
                     Text(
                       'Delete Account',

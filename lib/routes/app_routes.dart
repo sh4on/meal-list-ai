@@ -18,6 +18,8 @@ abstract final class AppRoutes {
 
   // main tab shell
   static const String main = '/main';
+  static const String buildingPlan = '/plan/building';
+  static const String replaceMeal = '/plan/replace-meal';
 
   // pantry module
   static const String pantry = '/pantry';
@@ -49,6 +51,7 @@ abstract final class AppRoutes {
   // shopping module
   static const String shoppingList = '/shopping-list';
   static const String shoppingMode = '/shopping-mode';
+  static const String finishShopping = '/shopping-mode/finish';
 
   // profile & settings sub-screens
   static const String progressInsights = '/profile/progress-insights';
@@ -64,4 +67,3 @@ abstract final class AppRoutes {
   static const String accountSettings = '/profile/account-settings';
   static const String shareYourWeek = '/profile/share-your-week';
 }
-

@@ -12,7 +12,8 @@ class RemoveConfirmationSheet extends StatelessWidget {
   final String itemName;
   final VoidCallback onConfirm;
 
-  const RemoveConfirmationSheet({super.key,
+  const RemoveConfirmationSheet({
+    super.key,
     required this.itemName,
     required this.onConfirm,
   });

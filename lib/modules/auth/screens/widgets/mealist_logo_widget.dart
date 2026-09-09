@@ -31,7 +31,9 @@ class MealistLogoWidget extends StatelessWidget {
             children: [
               TextSpan(
                 text: 'Mealist',
-                style: AppTextStyles.logoMark.copyWith(fontSize: 22,),
+                style: AppTextStyles.logoMark.copyWith(
+                  fontSize: 22,
+                ),
               ),
               TextSpan(
                 text: '.ai',

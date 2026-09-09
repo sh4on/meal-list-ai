@@ -55,13 +55,14 @@ class ForYouUseItUpCard extends StatelessWidget {
       if (earliestIndex > 0) {
         spans.add(TextSpan(text: remaining.substring(0, earliestIndex)));
       }
-      spans.add(TextSpan(
-        text: matchedWord,
-        style: const TextStyle(
-          fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
+      spans.add(
+        TextSpan(
+          text: matchedWord,
+          style: const TextStyle(
+            fontWeight: FontWeight.w700,
+            color: AppColors.textPrimary,
+          ),
         ),
-      ),
       );
       remaining = remaining.substring(earliestIndex + matchedWord.length);
     }
@@ -155,4 +156,3 @@ class ForYouUseItUpCard extends StatelessWidget {
     );
   }
 }
-

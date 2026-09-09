@@ -95,8 +95,7 @@ class _SearchPantryScreenState extends State<SearchPantryScreen> {
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 14),
+                        contentPadding: EdgeInsets.symmetric(vertical: 14),
                       ),
                     ),
                   ),
@@ -154,8 +153,7 @@ class _SearchPantryScreenState extends State<SearchPantryScreen> {
                   return InkWell(
                     onTap: () => Get.back(result: item),
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: AppSpacing.md.h),
+                      padding: EdgeInsets.symmetric(vertical: AppSpacing.md.h),
                       child: Row(
                         children: [
                           // item thumbnail
@@ -167,9 +165,10 @@ class _SearchPantryScreenState extends State<SearchPantryScreen> {
                                     width: 52.w,
                                     height: 52.w,
                                     fit: BoxFit.cover,
-                                    placeholder: (_, __) => Container(
-                                        color: AppColors.shimmerBase),
-                                    errorWidget: (_, __, ___) => _fallbackIcon(),
+                                    placeholder: (_, __) =>
+                                        Container(color: AppColors.shimmerBase),
+                                    errorWidget: (_, __, ___) =>
+                                        _fallbackIcon(),
                                   )
                                 : _fallbackIcon(),
                           ),
@@ -221,8 +220,7 @@ class _SearchPantryScreenState extends State<SearchPantryScreen> {
                 },
               ),
             ),
-          ] else if (_searchController.text.isNotEmpty &&
-              _results.isEmpty) ...[
+          ] else if (_searchController.text.isNotEmpty && _results.isEmpty) ...[
             Expanded(
               child: Center(
                 child: Column(
@@ -305,5 +303,3 @@ class _SearchPantryScreenState extends State<SearchPantryScreen> {
     }
   }
 }
-
-

@@ -55,7 +55,7 @@ class MealPlanDnaCard extends StatelessWidget {
               children: ['Mediterranean', 'Turkish', 'Italian'].map((String c) {
                 return Container(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.border),
                     borderRadius: BorderRadius.circular(AppRadius.pill),

@@ -17,7 +17,11 @@ class FoodPreferencesScreen extends StatefulWidget {
 class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
   String _selectedDietaryStyle = 'Omnivore';
 
-  final List<String> _favouriteCuisines = ['Mediterranean', 'Turkish', 'Italian'];
+  final List<String> _favouriteCuisines = [
+    'Mediterranean',
+    'Turkish',
+    'Italian',
+  ];
   final List<String> _lovedFoods = ['Chicken', 'Rice', 'Garlic', 'Spicy food'];
   final List<String> _dislikedFoods = ['Mushrooms', 'Very spicy food'];
 
@@ -52,13 +56,17 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Tell Mealist what you enjoy so recommendations feel more like you. Changes are saved automatically.',
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+              style: AppTextStyles.bodyMedium
+                  .copyWith(color: AppColors.textSecondary, height: 1.4),
             ),
             SizedBox(height: AppSpacing.lg.h),
 
@@ -104,7 +112,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                 ),
                 TextButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.add, size: 16, color: Color(0xFF265B46)),
+                  icon:
+                      const Icon(Icons.add, size: 16, color: Color(0xFF265B46)),
                   label: const Text(
                     'Add',
                     style: TextStyle(
@@ -123,7 +132,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
               runSpacing: 8,
               children: _favouriteCuisines.map((cuisine) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE2F0E7),
                     borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -142,8 +152,13 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                       ),
                       const SizedBox(width: 6),
                       GestureDetector(
-                        onTap: () => setState(() => _favouriteCuisines.remove(cuisine)),
-                        child: const Icon(Icons.close, size: 14, color: Color(0xFF1B4938)),
+                        onTap: () =>
+                            setState(() => _favouriteCuisines.remove(cuisine)),
+                        child: const Icon(
+                          Icons.close,
+                          size: 14,
+                          color: Color(0xFF1B4938),
+                        ),
                       ),
                     ],
                   ),
@@ -167,7 +182,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
             const SizedBox(height: 2),
             Text(
               'These improve ranking. They are not exclusions.',
-              style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
             SizedBox(height: AppSpacing.sm.h),
 
@@ -176,7 +192,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
               runSpacing: 8,
               children: _lovedFoods.map((food) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(AppRadius.md),
@@ -185,11 +202,21 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(food, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
+                      Text(
+                        food,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
                       const SizedBox(width: 6),
                       GestureDetector(
                         onTap: () => setState(() => _lovedFoods.remove(food)),
-                        child: const Icon(Icons.close, size: 14, color: AppColors.textTertiary),
+                        child: const Icon(
+                          Icons.close,
+                          size: 14,
+                          color: AppColors.textTertiary,
+                        ),
                       ),
                     ],
                   ),
@@ -202,9 +229,15 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
               controller: _loveController,
               decoration: InputDecoration(
                 hintText: 'Add ingredient or food...',
-                hintStyle: const TextStyle(color: AppColors.textTertiary, fontSize: 13),
+                hintStyle: const TextStyle(
+                  color: AppColors.textTertiary,
+                  fontSize: 13,
+                ),
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.add_circle_outline, color: Color(0xFF265B46)),
+                  icon: const Icon(
+                    Icons.add_circle_outline,
+                    color: Color(0xFF265B46),
+                  ),
                   onPressed: () {
                     if (_loveController.text.trim().isNotEmpty) {
                       setState(() {
@@ -216,7 +249,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                 ),
                 filled: true,
                 fillColor: AppColors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppRadius.md),
                   borderSide: const BorderSide(color: AppColors.border),
@@ -242,7 +276,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
             const SizedBox(height: 2),
             Text(
               'Dislikes lower ranking. They are not hard exclusions.',
-              style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.bodySmall
+                  .copyWith(color: AppColors.textSecondary),
             ),
             SizedBox(height: AppSpacing.sm.h),
 
@@ -251,7 +286,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
               runSpacing: 8,
               children: _dislikedFoods.map((food) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(AppRadius.md),
@@ -260,11 +296,22 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(food, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
+                      Text(
+                        food,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
                       const SizedBox(width: 6),
                       GestureDetector(
-                        onTap: () => setState(() => _dislikedFoods.remove(food)),
-                        child: const Icon(Icons.close, size: 14, color: AppColors.textTertiary),
+                        onTap: () =>
+                            setState(() => _dislikedFoods.remove(food)),
+                        child: const Icon(
+                          Icons.close,
+                          size: 14,
+                          color: AppColors.textTertiary,
+                        ),
                       ),
                     ],
                   ),
@@ -277,9 +324,15 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
               controller: _dislikeController,
               decoration: InputDecoration(
                 hintText: 'Add ingredient to avoid...',
-                hintStyle: const TextStyle(color: AppColors.textTertiary, fontSize: 13),
+                hintStyle: const TextStyle(
+                  color: AppColors.textTertiary,
+                  fontSize: 13,
+                ),
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.add_circle_outline, color: Color(0xFF265B46)),
+                  icon: const Icon(
+                    Icons.add_circle_outline,
+                    color: Color(0xFF265B46),
+                  ),
                   onPressed: () {
                     if (_dislikeController.text.trim().isNotEmpty) {
                       setState(() {
@@ -291,7 +344,8 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                 ),
                 filled: true,
                 fillColor: AppColors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppRadius.md),
                   borderSide: const BorderSide(color: AppColors.border),
@@ -325,7 +379,11 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                         color: Color(0xFFFDECEB),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.medical_services_outlined, color: Color(0xFFC75146), size: 20),
+                      child: const Icon(
+                        Icons.medical_services_outlined,
+                        color: Color(0xFFC75146),
+                        size: 20,
+                      ),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
@@ -343,12 +401,17 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
                           const SizedBox(height: 2),
                           Text(
                             'Manage Allergies & Restrictions',
-                            style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                            style: AppTextStyles.bodySmall
+                                .copyWith(color: AppColors.textSecondary),
                           ),
                         ],
                       ),
                     ),
-                    const Icon(Icons.chevron_right, color: AppColors.textTertiary, size: 20),
+                    const Icon(
+                      Icons.chevron_right,
+                      color: AppColors.textTertiary,
+                      size: 20,
+                    ),
                   ],
                 ),
               ),
@@ -383,13 +446,17 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
             Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFFE2F0E7) : const Color(0xFFF3F4F3),
+                color: isSelected
+                    ? const Color(0xFFE2F0E7)
+                    : const Color(0xFFF3F4F3),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 icon,
                 size: 18,
-                color: isSelected ? const Color(0xFF265B46) : AppColors.textSecondary,
+                color: isSelected
+                    ? const Color(0xFF265B46)
+                    : AppColors.textSecondary,
               ),
             ),
             const SizedBox(height: 8),
@@ -398,7 +465,9 @@ class _FoodPreferencesScreenState extends State<FoodPreferencesScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
-                color: isSelected ? const Color(0xFF265B46) : AppColors.textPrimary,
+                color: isSelected
+                    ? const Color(0xFF265B46)
+                    : AppColors.textPrimary,
               ),
             ),
           ],

@@ -10,7 +10,8 @@ class CounterRow extends StatelessWidget {
   final VoidCallback onDecrement;
   final VoidCallback onIncrement;
 
-  const CounterRow({super.key,
+  const CounterRow({
+    super.key,
     required this.label,
     required this.value,
     required this.onDecrement,

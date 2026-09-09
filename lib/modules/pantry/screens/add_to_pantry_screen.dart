@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mealist_ai/modules/pantry/screens/widgets/quantity_stepper.dart';
@@ -24,8 +23,7 @@ class AddToPantryScreen extends StatefulWidget {
 
 class _AddToPantryScreenState extends State<AddToPantryScreen> {
   final TextEditingController _ingredientController = TextEditingController();
-  final TextEditingController _qtyController =
-      TextEditingController(text: '1');
+  final TextEditingController _qtyController = TextEditingController(text: '1');
   String _selectedUnit = 'pcs';
   String _selectedCategory = 'Pantry';
   DateTime? _useByDate;
@@ -129,7 +127,7 @@ class _AddToPantryScreenState extends State<AddToPantryScreen> {
               'What would you like to add?',
               style: AppTextStyles.bodyLarge.copyWith(
                 //color: AppColors.textSecondary,
-                fontWeight: FontWeight.w600
+                fontWeight: FontWeight.w600,
               ),
             ),
 
@@ -303,7 +301,7 @@ class _AddToPantryScreenState extends State<AddToPantryScreen> {
               },
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.calendar_today_outlined,
                     size: 16,
                     color: AppColors.primary,

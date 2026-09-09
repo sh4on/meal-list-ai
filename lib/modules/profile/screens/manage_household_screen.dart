@@ -38,7 +38,10 @@ class ManageHouseholdScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,7 +49,10 @@ class ManageHouseholdScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Your Household', style: AppTextStyles.headlineSmall),
+                const Text(
+                  'Your Household',
+                  style: AppTextStyles.headlineSmall,
+                ),
                 Text(
                   '3 Total Members',
                   style: AppTextStyles.labelMedium.copyWith(
@@ -76,7 +82,11 @@ class ManageHouseholdScreen extends StatelessWidget {
                       const SizedBox(width: 8),
                       _buildCountBadge('1 CHILD', isPrimary: false),
                       const Spacer(),
-                      const Icon(Icons.sync, size: 14, color: Color(0xFF336A56)),
+                      const Icon(
+                        Icons.sync,
+                        size: 14,
+                        color: Color(0xFF336A56),
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         'Active sync',
@@ -105,7 +115,10 @@ class ManageHouseholdScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Household Members', style: AppTextStyles.headlineSmall),
+                const Text(
+                  'Household Members',
+                  style: AppTextStyles.headlineSmall,
+                ),
                 Text(
                   'Tap to edit rules',
                   style: AppTextStyles.labelMedium.copyWith(
@@ -219,7 +232,11 @@ class ManageHouseholdScreen extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.shield_outlined, color: Color(0xFF2E634F), size: 22),
+                  const Icon(
+                    Icons.shield_outlined,
+                    color: Color(0xFF2E634F),
+                    size: 22,
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
@@ -318,7 +335,11 @@ class ManageHouseholdScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(name, style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold)),
+                      Text(
+                        name,
+                        style: AppTextStyles.titleMedium
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
                       if (nameSuffix != null)
                         Text(
                           nameSuffix,
@@ -329,7 +350,10 @@ class ManageHouseholdScreen extends StatelessWidget {
                         ),
                       const SizedBox(width: 8),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFEDEDED),
                           borderRadius: BorderRadius.circular(4),
@@ -348,11 +372,16 @@ class ManageHouseholdScreen extends StatelessWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(portionIcon, size: 14, color: AppColors.textSecondary),
+                      Icon(
+                        portionIcon,
+                        size: 14,
+                        color: AppColors.textSecondary,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         portionText,
-                        style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                        style: AppTextStyles.bodySmall
+                            .copyWith(color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -365,7 +394,11 @@ class ManageHouseholdScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.textTertiary),
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 14,
+              color: AppColors.textTertiary,
+            ),
           ],
         ),
       ),

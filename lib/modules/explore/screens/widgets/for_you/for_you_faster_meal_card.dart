@@ -111,4 +111,3 @@ class ForYouFasterMealCard extends StatelessWidget {
     );
   }
 }
-

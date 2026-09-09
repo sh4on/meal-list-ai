@@ -12,7 +12,8 @@ class QuantityStepper extends StatelessWidget {
   final VoidCallback onDecrement;
   final VoidCallback onIncrement;
 
-  const QuantityStepper({super.key,
+  const QuantityStepper({
+    super.key,
     required this.controller,
     required this.onDecrement,
     required this.onIncrement,

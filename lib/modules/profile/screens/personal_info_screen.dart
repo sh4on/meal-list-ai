@@ -51,13 +51,17 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Everything here is optional. We only use this information to recommend nutrition targets when you choose that option.',
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.4),
+              style: AppTextStyles.bodyMedium
+                  .copyWith(color: AppColors.textSecondary, height: 1.4),
             ),
             SizedBox(height: AppSpacing.lg.h),
 
@@ -85,9 +89,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         hintText: 'e.g. 175',
-                        hintStyle: TextStyle(color: AppColors.textTertiary, fontSize: 14),
+                        hintStyle: TextStyle(
+                          color: AppColors.textTertiary,
+                          fontSize: 14,
+                        ),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       ),
                     ),
                   ),
@@ -133,9 +141,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         hintText: 'e.g. 70',
-                        hintStyle: TextStyle(color: AppColors.textTertiary, fontSize: 14),
+                        hintStyle: TextStyle(
+                          color: AppColors.textTertiary,
+                          fontSize: 14,
+                        ),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       ),
                     ),
                   ),
@@ -177,9 +189,16 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   isExpanded: true,
-                  hint: const Text('Select...', style: TextStyle(color: AppColors.textTertiary, fontSize: 14)),
+                  hint: const Text(
+                    'Select...',
+                    style: TextStyle(
+                      color: AppColors.textTertiary,
+                      fontSize: 14,
+                    ),
+                  ),
                   value: _selectedSex,
-                  items: ['Female', 'Male', 'Other', 'Prefer not to say'].map((s) {
+                  items:
+                      ['Female', 'Male', 'Other', 'Prefer not to say'].map((s) {
                     return DropdownMenuItem(value: s, child: Text(s));
                   }).toList(),
                   onChanged: (v) => setState(() => _selectedSex = v),
@@ -195,12 +214,17 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.lock_outline, size: 16, color: AppColors.textSecondary),
+                const Icon(
+                  Icons.lock_outline,
+                  size: 16,
+                  color: AppColors.textSecondary,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     'Your information is protected and used only for the purposes described above.',
-                    style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.bodySmall
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                 ),
               ],
@@ -242,7 +266,10 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     );
   }
 
-  Widget _buildTextField({required TextEditingController controller, required String hint}) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hint,
+  }) {
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
@@ -251,7 +278,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
         hintStyle: const TextStyle(color: AppColors.textTertiary, fontSize: 14),
         filled: true,
         fillColor: AppColors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
           borderSide: const BorderSide(color: AppColors.border),

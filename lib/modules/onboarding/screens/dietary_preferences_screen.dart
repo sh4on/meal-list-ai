@@ -6,10 +6,8 @@ import 'package:mealist_ai/modules/onboarding/screens/widgets/top_nav.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../shared/common_widgets/primary_button_widget.dart';
 import '../../../shared/common_widgets/selection_chip_widget.dart';
 import '../controllers/onboarding_controller.dart';
-import 'widgets/onboarding_progress_widget.dart';
 import 'widgets/onboarding_option_card_widget.dart';
 
 // dietary preferences — step 2 of onboarding (figma: "Dietary preferences")
@@ -54,29 +52,28 @@ class DietaryPreferencesScreen extends GetView<OnboardingController> {
                   // 2-column diet option grid
                   GridView.builder(
                     padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: 1.6,
-                      ),
-                      itemCount: controller.dietOptions.length,
-                      itemBuilder: (_, int index) {
-                        final String diet = controller.dietOptions[index];
-                        final bool isSelected =
-                            controller.selectedDiet.value == diet;
-                        return OnboardingOptionCardWidget(
-                          title: diet,
-                          subtitle: _dietSubtitle(diet),
-                          isSelected: isSelected,
-                          onTap: () => controller.selectDiet(diet),
-                        );
-                      },
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 1.6,
                     ),
-
+                    itemCount: controller.dietOptions.length,
+                    itemBuilder: (_, int index) {
+                      final String diet = controller.dietOptions[index];
+                      final bool isSelected =
+                          controller.selectedDiet.value == diet;
+                      return OnboardingOptionCardWidget(
+                        title: diet,
+                        subtitle: _dietSubtitle(diet),
+                        isSelected: isSelected,
+                        onTap: () => controller.selectDiet(diet),
+                      );
+                    },
+                  ),
 
                   SizedBox(height: AppSpacing.sectionGap.h),
 

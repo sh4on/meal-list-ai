@@ -25,7 +25,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hint,
           hintStyle:
-          AppTextStyles.bodyMedium.copyWith(color: AppColors.textTertiary),
+              AppTextStyles.bodyMedium.copyWith(color: AppColors.textTertiary),
           prefixIcon: const Icon(
             Icons.search,
             color: AppColors.textTertiary,

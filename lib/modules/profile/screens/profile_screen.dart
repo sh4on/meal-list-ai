@@ -7,8 +7,6 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../routes/app_routes.dart';
-import '../../../shared/common_widgets/primary_button_widget.dart';
 import '../controllers/profile_controller.dart';
 
 // profile screen — matches figma: avatar, completion bar, meal plan DNA card,
@@ -156,10 +154,3 @@ class ProfileScreen extends GetView<ProfileController> {
     );
   }
 }
-
-
-
-
-
-
-

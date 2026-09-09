@@ -17,7 +17,13 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
   bool _noRestrictions = false;
 
   final Set<String> _selectedAllergies = {'Dairy', 'Gluten'};
-  final List<String> _allergyList = ['Dairy', 'Peanuts', 'Tree Nuts', 'Gluten', 'Eggs'];
+  final List<String> _allergyList = [
+    'Dairy',
+    'Peanuts',
+    'Tree Nuts',
+    'Gluten',
+    'Eggs',
+  ];
 
   final Set<String> _selectedDietary = {'Halal'};
   final List<String> _dietaryList = ['Halal', 'Kosher', 'No Alcohol'];
@@ -46,7 +52,10 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w, vertical: AppSpacing.sm.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenH.w,
+          vertical: AppSpacing.sm.h,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,7 +69,9 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(AppRadius.md),
                   border: Border.all(
-                    color: _noRestrictions ? const Color(0xFF2E634F) : AppColors.border,
+                    color: _noRestrictions
+                        ? const Color(0xFF2E634F)
+                        : AppColors.border,
                     width: _noRestrictions ? 1.5 : 1,
                   ),
                 ),
@@ -73,7 +84,11 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                         color: Color(0xFFD6EDE0),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.check, color: Color(0xFF235843), size: 22),
+                      child: const Icon(
+                        Icons.check,
+                        color: Color(0xFF235843),
+                        size: 22,
+                      ),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
@@ -91,14 +106,19 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                           const SizedBox(height: 2),
                           Text(
                             'Skip this step and eat everything',
-                            style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                            style: AppTextStyles.bodySmall
+                                .copyWith(color: AppColors.textSecondary),
                           ),
                         ],
                       ),
                     ),
                     Icon(
-                      _noRestrictions ? Icons.radio_button_checked : Icons.radio_button_off,
-                      color: _noRestrictions ? const Color(0xFF2E634F) : AppColors.textTertiary,
+                      _noRestrictions
+                          ? Icons.radio_button_checked
+                          : Icons.radio_button_off,
+                      color: _noRestrictions
+                          ? const Color(0xFF2E634F)
+                          : AppColors.textTertiary,
                     ),
                   ],
                 ),
@@ -112,9 +132,19 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
             // ALLERGIES
             Row(
               children: [
-                Text('ALLERGIES', style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, letterSpacing: 0.8)),
+                Text(
+                  'ALLERGIES',
+                  style: AppTextStyles.labelSmall.copyWith(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                  ),
+                ),
                 const Spacer(),
-                const Icon(Icons.medical_services, size: 14, color: Color(0xFFB9382F)),
+                const Icon(
+                  Icons.medical_services,
+                  size: 14,
+                  color: Color(0xFFB9382F),
+                ),
               ],
             ),
             SizedBox(height: AppSpacing.xs.h),
@@ -138,12 +168,17 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                     });
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFFB9382F) : AppColors.white,
+                      color: isSelected
+                          ? const Color(0xFFB9382F)
+                          : AppColors.white,
                       borderRadius: BorderRadius.circular(AppRadius.pill),
                       border: Border.all(
-                        color: isSelected ? const Color(0xFFB9382F) : AppColors.border,
+                        color: isSelected
+                            ? const Color(0xFFB9382F)
+                            : AppColors.border,
                       ),
                     ),
                     child: Row(
@@ -152,14 +187,20 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                         Text(
                           allergy,
                           style: TextStyle(
-                            color: isSelected ? AppColors.white : AppColors.textPrimary,
+                            color: isSelected
+                                ? AppColors.white
+                                : AppColors.textPrimary,
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         if (isSelected) ...[
                           const SizedBox(width: 4),
-                          const Icon(Icons.close, size: 14, color: AppColors.white),
+                          const Icon(
+                            Icons.close,
+                            size: 14,
+                            color: AppColors.white,
+                          ),
                         ],
                       ],
                     ),
@@ -173,9 +214,19 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
             // DIETARY & RELIGIOUS
             Row(
               children: [
-                Text('DIETARY & RELIGIOUS', style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, letterSpacing: 0.8)),
+                Text(
+                  'DIETARY & RELIGIOUS',
+                  style: AppTextStyles.labelSmall.copyWith(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                  ),
+                ),
                 const Spacer(),
-                const Icon(Icons.menu_book_outlined, size: 14, color: Color(0xFF2E634F)),
+                const Icon(
+                  Icons.menu_book_outlined,
+                  size: 14,
+                  color: Color(0xFF2E634F),
+                ),
               ],
             ),
             SizedBox(height: AppSpacing.xs.h),
@@ -199,12 +250,17 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                     });
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFF2E634F) : AppColors.white,
+                      color: isSelected
+                          ? const Color(0xFF2E634F)
+                          : AppColors.white,
                       borderRadius: BorderRadius.circular(AppRadius.pill),
                       border: Border.all(
-                        color: isSelected ? const Color(0xFF2E634F) : AppColors.border,
+                        color: isSelected
+                            ? const Color(0xFF2E634F)
+                            : AppColors.border,
                       ),
                     ),
                     child: Row(
@@ -213,14 +269,20 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                         Text(
                           diet,
                           style: TextStyle(
-                            color: isSelected ? AppColors.white : AppColors.textPrimary,
+                            color: isSelected
+                                ? AppColors.white
+                                : AppColors.textPrimary,
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         if (isSelected) ...[
                           const SizedBox(width: 4),
-                          const Icon(Icons.close, size: 14, color: AppColors.white),
+                          const Icon(
+                            Icons.close,
+                            size: 14,
+                            color: AppColors.white,
+                          ),
                         ],
                       ],
                     ),
@@ -234,9 +296,19 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
             // SPECIFIC INGREDIENTS
             Row(
               children: [
-                Text('SPECIFIC INGREDIENTS', style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, letterSpacing: 0.8)),
+                Text(
+                  'SPECIFIC INGREDIENTS',
+                  style: AppTextStyles.labelSmall.copyWith(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                  ),
+                ),
                 const Spacer(),
-                const Icon(Icons.spa_outlined, size: 14, color: Color(0xFF2E634F)),
+                const Icon(
+                  Icons.spa_outlined,
+                  size: 14,
+                  color: Color(0xFF2E634F),
+                ),
               ],
             ),
             SizedBox(height: AppSpacing.xs.h),
@@ -250,23 +322,33 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.search, color: AppColors.textTertiary, size: 20),
+                  const Icon(
+                    Icons.search,
+                    color: AppColors.textTertiary,
+                    size: 20,
+                  ),
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
                       'I cannot eat shellfish',
-                      style: TextStyle(fontSize: 13, color: AppColors.textPrimary),
+                      style:
+                          TextStyle(fontSize: 13, color: AppColors.textPrimary),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: const Color(0xFFE2E4E2),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: const Text(
                       'Add',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF555555)),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF555555),
+                      ),
                     ),
                   ),
                 ],
@@ -285,7 +367,11 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.auto_awesome, color: Color(0xFFE28B38), size: 20),
+                    const Icon(
+                      Icons.auto_awesome,
+                      color: Color(0xFFE28B38),
+                      size: 20,
+                    ),
                     const SizedBox(width: 10),
                     const Expanded(
                       child: Column(
@@ -293,26 +379,44 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                         children: [
                           Text(
                             'Shellfish',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
                           ),
                           SizedBox(height: 2),
                           Text(
                             'Categorized as Allergy',
-                            style: TextStyle(fontSize: 12, color: Color(0xFFDF7F25)),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFFDF7F25),
+                            ),
                           ),
                         ],
                       ),
                     ),
                     OutlinedButton(
-                      onPressed: () => setState(() => _showShellfishCard = false),
+                      onPressed: () =>
+                          setState(() => _showShellfishCard = false),
                       style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         side: const BorderSide(color: AppColors.border),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
                       ),
-                      child: const Text('Remove', style: TextStyle(color: Color(0xFF555555), fontSize: 12)),
+                      child: const Text(
+                        'Remove',
+                        style: TextStyle(
+                          color: Color(0xFF555555),
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                     const SizedBox(width: 8),
                     ElevatedButton(
@@ -320,13 +424,24 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFEE9748),
                         foregroundColor: AppColors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
                         elevation: 0,
                       ),
-                      child: const Text('Confirm', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        'Confirm',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -339,13 +454,20 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
               runSpacing: 8,
               children: _specificIngredients.map((ingredient) {
                 return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(AppRadius.pill),
                     border: Border.all(color: AppColors.border),
                   ),
-                  child: Text(ingredient, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
+                  child: Text(
+                    ingredient,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
                 );
               }).toList(),
             ),
@@ -362,10 +484,12 @@ class _ManageAllergiesScreenState extends State<ManageAllergiesScreen> {
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: const TextStyle(color: AppColors.textTertiary, fontSize: 13),
-        prefixIcon: const Icon(Icons.search, size: 20, color: AppColors.textTertiary),
+        prefixIcon:
+            const Icon(Icons.search, size: 20, color: AppColors.textTertiary),
         filled: true,
         fillColor: AppColors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
           borderSide: const BorderSide(color: AppColors.border),
