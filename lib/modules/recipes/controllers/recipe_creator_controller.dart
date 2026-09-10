@@ -5,42 +5,88 @@ import '../../../routes/app_routes.dart';
 // recipe creator controller
 // manages multi-step wizard state for importing and authoring custom recipes
 class RecipeCreatorController extends GetxController {
-  // current wizard step: 0: Basics, 1: Ingredients, 2: Instructions, 3: Nutrition, 4: Review
+  // current wizard step: 0: Basics, 1: Ingredients, 2: Steps, 3: Nutrition, 4: Review
   final RxInt wizardStep = 0.obs;
 
   // step 1: basics
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descController = TextEditingController();
-  final TextEditingController prepTimeController =
-      TextEditingController(text: '15');
-  final TextEditingController cookTimeController =
-      TextEditingController(text: '20');
-  final TextEditingController servingsController =
-      TextEditingController(text: '2');
-  final RxString selectedCategory = 'Dinner'.obs;
+  // prefilled with the imported sample recipe data to match the review design
+  final TextEditingController titleController =
+      TextEditingController(text: 'Mediterranean Lentil & Chicken Bowl');
+  final TextEditingController descController = TextEditingController(
+    text: 'A hearty, protein-packed bowl perfect for meal prep.',
+  );
+  final RxString selectedCuisine = 'Mediterranean'.obs;
+  // remote image displayed in the review hero section
+  final RxString recipeImageUrl =
+      'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop&q=80'
+          .obs;
+  final RxBool isImported = true.obs;
+  final RxBool hasAllergenWarning = true.obs;
 
-  // step 2: ingredients
+  // available cuisine types for the dropdown
+  static const List<String> cuisineTypes = [
+    'Mediterranean',
+    'Asian',
+    'American',
+    'Italian',
+    'Mexican',
+    'Indian',
+    'Middle Eastern',
+    'French',
+    'Japanese',
+    'Greek',
+  ];
+
+  // step 2: ingredients — each map holds name, qty, unit, and optional warning
   final RxList<Map<String, String>> ingredients = <Map<String, String>>[
-    {'name': 'Chicken Breast', 'qty': '500g'},
-    {'name': 'Olive Oil', 'qty': '2 tbsp'},
-    {'name': 'Garlic', 'qty': '3 cloves'},
+    {'name': 'Cooked Lentils', 'qty': '1', 'unit': 'cup'},
+    {
+      'name': 'Shredded Chicken',
+      'qty': '-',
+      'unit': 'unit',
+      'warning': 'Quantity unclear from text',
+    },
+    {'name': 'Greek Yogurt', 'qty': '0.5', 'unit': 'cup'},
+    {'name': 'Pomegranate Seeds', 'qty': '2', 'unit': 'tbsp'},
   ].obs;
 
-  // step 3: instructions
+  // supported measurement units shown in the ingredient unit dropdown
+  static const List<String> units = [
+    'g',
+    'kg',
+    'ml',
+    'L',
+    'cup',
+    'tbsp',
+    'tsp',
+    'oz',
+    'lb',
+    'piece',
+    'clove',
+    'slice',
+    'unit',
+  ];
+
+  // step 3: instructions — ordered list of step text strings
   final RxList<String> instructions = <String>[
-    'Preheat oven to 200°C (400°F).',
-    'Dice the chicken breast into even bite-sized pieces.',
-    'Sauté garlic in olive oil, add chicken, and roast until golden.',
+    'Layer the cooked lentils at the bottom of the bowl.',
+    'Top with shredded chicken.',
+    'Add a dollop of Greek yogurt.',
+    'Sprinkle pomegranate seeds and fresh herbs over the top.',
   ].obs;
 
-  // step 4: nutrition
+  // step 4: nutrition values matching the figma design
   final TextEditingController caloriesController =
-      TextEditingController(text: '450');
+      TextEditingController(text: '420');
   final TextEditingController proteinController =
-      TextEditingController(text: '48');
+      TextEditingController(text: '32');
   final TextEditingController carbsController =
-      TextEditingController(text: '12');
-  final TextEditingController fatController = TextEditingController(text: '18');
+      TextEditingController(text: '45');
+  final TextEditingController fatController = TextEditingController(text: '12');
+
+  // when true the UI shows AI-estimated badges and disables manual editing
+  final RxBool autoEstimateNutrition = true.obs;
+  final RxBool isAutoEstimating = false.obs;
 
   // url import controller
   final TextEditingController urlController = TextEditingController();
@@ -50,9 +96,6 @@ class RecipeCreatorController extends GetxController {
   void onClose() {
     titleController.dispose();
     descController.dispose();
-    prepTimeController.dispose();
-    cookTimeController.dispose();
-    servingsController.dispose();
     caloriesController.dispose();
     proteinController.dispose();
     carbsController.dispose();
@@ -75,9 +118,17 @@ class RecipeCreatorController extends GetxController {
     }
   }
 
-  void addIngredient(final String name, final String qty) {
+  void addIngredient(
+    final String name,
+    final String qty,
+    final String unit,
+  ) {
     if (name.isNotEmpty) {
-      ingredients.add({'name': name, 'qty': qty.isEmpty ? '1 item' : qty});
+      ingredients.add({
+        'name': name,
+        'qty': qty.isEmpty ? '1' : qty,
+        'unit': unit.isEmpty ? 'g' : unit,
+      });
     }
   }
 
@@ -87,9 +138,14 @@ class RecipeCreatorController extends GetxController {
     }
   }
 
-  void addInstruction(final String step) {
-    if (step.isNotEmpty) {
-      instructions.add(step);
+  void addInstruction() {
+    // adds a blank step that the user can type into
+    instructions.add('');
+  }
+
+  void updateInstruction(final int index, final String value) {
+    if (index >= 0 && index < instructions.length) {
+      instructions[index] = value;
     }
   }
 
@@ -99,14 +155,31 @@ class RecipeCreatorController extends GetxController {
     }
   }
 
-  void importUrl() async {
+  // simulates toggling AI auto-estimate and running estimation
+  Future<void> toggleAutoEstimate() async {
+    autoEstimateNutrition.value = !autoEstimateNutrition.value;
+    if (autoEstimateNutrition.value) {
+      // simulate AI computation delay
+      isAutoEstimating.value = true;
+      await Future.delayed(const Duration(milliseconds: 800));
+      caloriesController.text = '485';
+      proteinController.text = '32';
+      carbsController.text = '45';
+      fatController.text = '18';
+      isAutoEstimating.value = false;
+    }
+  }
+
+  // simulate url import that navigates to wizard on completion
+  Future<void> importUrl() async {
     final String url = urlController.text.trim();
     if (url.isNotEmpty) {
       isImporting.value = true;
-      await Future.delayed(const Duration(milliseconds: 700));
+      await Future.delayed(const Duration(milliseconds: 1200));
       isImporting.value = false;
-      titleController.text = 'Imported Pasta Primavera';
-      descController.text = 'Extracted from $url';
+      titleController.text = 'Mediterranean Lentil & Chicken Bowl';
+      descController.text =
+          'A hearty, protein-packed bowl perfect for meal prep.';
       Get.offNamed(AppRoutes.createRecipeWizard);
     }
   }

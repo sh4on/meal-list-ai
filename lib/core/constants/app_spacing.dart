@@ -62,6 +62,9 @@ abstract final class AppSpacing {
   // recipe card image height
   static const double recipeCardImage = 180.0;
 
+  // full-bleed hero image height for the recipe details SliverAppBar
+  static const double heroImageHeight = 320.0;
+
   // cuisine grid item height
   static const double cuisineGridHeight = 120.0;
 
