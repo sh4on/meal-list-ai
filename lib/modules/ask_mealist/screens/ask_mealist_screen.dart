@@ -9,7 +9,7 @@ import '../../../shared/common_widgets/primary_button_widget.dart';
 import '../controllers/ask_mealist_controller.dart';
 
 // ask mealist adaptation screen
-// empowers users to customize recipes using AI natural language instructions
+// allows users to customize recipes using AI suggestions or natural language prompts
 class AskMealistScreen extends GetView<AskMealistController> {
   const AskMealistScreen({super.key});
 
@@ -19,6 +19,7 @@ class AskMealistScreen extends GetView<AskMealistController> {
       backgroundColor: AppColors.bg,
       appBar: AppBar(
         backgroundColor: AppColors.bg,
+        elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: Get.back,
@@ -26,175 +27,221 @@ class AskMealistScreen extends GetView<AskMealistController> {
         title: const Text('Ask Mealist', style: AppTextStyles.headlineSmall),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: AppSpacing.md.h),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenH.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: AppSpacing.sm.h),
 
-            // header card
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AppSpacing.cardPadding),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(AppRadius.md),
-                border: Border.all(color: AppColors.border),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    children: [
-                      Icon(
-                        Icons.auto_awesome,
-                        color: AppColors.accent,
-                        size: 20,
-                      ),
-                      SizedBox(width: 8),
-                      Text('Ask Mealist', style: AppTextStyles.headlineSmall),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Adapting Mediterranean Chicken',
-                    style: AppTextStyles.titleSmall.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  const Text(
-                    'A new version will be saved to your recipes.',
-                    style: AppTextStyles.bodySmall,
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: AppSpacing.lg.h),
-
-            // quick suggestions section
-            const Text('QUICK SUGGESTIONS', style: AppTextStyles.sectionHeader),
-            SizedBox(height: AppSpacing.sm.h),
-
-            Obx(
-              () => Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: controller.quickSuggestions.map((final item) {
-                  final String label = item['label'] as String;
-                  final IconData icon = item['icon'] as IconData;
-                  final bool isSelected =
-                      controller.selectedSuggestion.value == label;
-
-                  return GestureDetector(
-                    onTap: () => controller.selectSuggestion(label),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? AppColors.primarySurface
-                            : AppColors.white,
-                        borderRadius: BorderRadius.circular(AppRadius.pill),
-                        border: Border.all(
-                          color:
-                              isSelected ? AppColors.primary : AppColors.border,
+              // top card with centered header and recipe context
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(AppSpacing.cardPadding),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
+                  border: Border.all(color: AppColors.border),
+                ),
+                child: Column(
+                  children: [
+                    // close button inside card on top right
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: GestureDetector(
+                        onTap: Get.back,
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF4F3EE),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.close,
+                            size: 16,
+                            color: AppColors.textSecondary,
+                          ),
                         ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                    ),
+
+                    // centered title
+                    Text(
+                      'Ask Mealist',
+                      style: AppTextStyles.headlineMedium.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+
+                    // adapting recipe subtitle
+                    Text(
+                      'Adapting Mediterranean Chicken',
+                      style: AppTextStyles.titleSmall.copyWith(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+
+                    // descriptive context
+                    Text(
+                      'A new version will be saved to your recipes.',
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                    SizedBox(height: AppSpacing.lg.h),
+
+                    // quick suggestions header
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'QUICK SUGGESTIONS',
+                        style: AppTextStyles.labelSmall.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textSecondary,
+                          letterSpacing: 0.6,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: AppSpacing.sm.h),
+
+                    // suggestions wrap chips
+                    Obx(
+                      () => Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: controller.quickSuggestions.map((final item) {
+                          final String label = item['label'] as String;
+                          final IconData icon = item['icon'] as IconData;
+                          final bool isSelected =
+                              controller.selectedSuggestion.value == label;
+
+                          return GestureDetector(
+                            onTap: () => controller.selectSuggestion(label),
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 180),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? const Color(0xFFC3E8D8)
+                                    : AppColors.white,
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.pill),
+                                border: Border.all(
+                                  color: isSelected
+                                      ? AppColors.primary
+                                      : AppColors.border,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    icon,
+                                    size: 15,
+                                    color: isSelected
+                                        ? AppColors.primary
+                                        : AppColors.textSecondary,
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    label,
+                                    style: AppTextStyles.labelMedium.copyWith(
+                                      color: isSelected
+                                          ? AppColors.primary
+                                          : AppColors.textPrimary,
+                                      fontWeight: isSelected
+                                          ? FontWeight.w700
+                                          : FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    SizedBox(height: AppSpacing.lg.h),
+
+                    // custom input prompt label
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'What would you like to change?',
+                        style: AppTextStyles.labelSmall.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: AppSpacing.xs.h),
+
+                    // text input field container with microphone button
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(AppRadius.md),
+                        border: Border.all(color: AppColors.border),
+                      ),
+                      child: Stack(
                         children: [
-                          Icon(
-                            icon,
-                            size: 16,
-                            color: isSelected
-                                ? AppColors.primary
-                                : AppColors.textSecondary,
+                          TextField(
+                            controller: controller.promptController,
+                            maxLines: 3,
+                            style: AppTextStyles.inputText,
+                            decoration: const InputDecoration(
+                              hintText:
+                                  'e.g. Can we make this spicy and add more vegetables?',
+                              hintStyle: AppTextStyles.inputHint,
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.fromLTRB(14, 14, 42, 14),
+                            ),
                           ),
-                          const SizedBox(width: 6),
-                          Text(
-                            label,
-                            style: AppTextStyles.labelMedium.copyWith(
-                              color: isSelected
-                                  ? AppColors.primary
-                                  : AppColors.textPrimary,
-                              fontWeight: isSelected
-                                  ? FontWeight.w600
-                                  : FontWeight.w400,
+                          Positioned(
+                            right: 6,
+                            bottom: 6,
+                            child: Container(
+                              width: 32,
+                              height: 32,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFF4F3EE),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.mic_none_outlined,
+                                color: AppColors.textSecondary,
+                                size: 18,
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                  );
-                }).toList(),
-              ),
-            ),
+                    SizedBox(height: AppSpacing.lg.h),
 
-            SizedBox(height: AppSpacing.xl.h),
-
-            // prompt input section
-            const Text(
-              'What would you like to change?',
-              style: AppTextStyles.titleSmall,
-            ),
-            SizedBox(height: AppSpacing.xs.h),
-
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(AppRadius.md),
-                border: Border.all(color: AppColors.border),
-              ),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: controller.promptController,
-                    maxLines: 4,
-                    style: AppTextStyles.inputText,
-                    decoration: const InputDecoration(
-                      hintText:
-                          'e.g. Can we make this spicy and add more vegetables?',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(AppSpacing.cardPadding),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8, bottom: 8),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.mic_outlined,
-                          color: AppColors.textTertiary,
-                        ),
-                        onPressed: () {},
+                    // adapt recipe CTA button
+                    Obx(
+                      () => PrimaryButtonWidget(
+                        label: '✨ Adapt Recipe →',
+                        isLoading: controller.isLoading.value,
+                        onTap: controller.adaptRecipe,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            SizedBox(height: AppSpacing.xxl.h),
-
-            // adapt recipe action button
-            Obx(
-              () => PrimaryButtonWidget(
-                label: '✨ Adapt Recipe →',
-                isLoading: controller.isLoading.value,
-                onTap: controller.adaptRecipe,
-              ),
-            ),
-
-            SizedBox(height: AppSpacing.xl.h),
-          ],
+              SizedBox(height: AppSpacing.xl.h),
+            ],
+          ),
         ),
       ),
     );
